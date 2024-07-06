@@ -57,6 +57,24 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define MSDriver_ENA_H_Pin GPIO_PIN_11
+#define MSDriver_ENA_H_GPIO_Port GPIOF
+#define MSDriver_DIR_H_Pin GPIO_PIN_13
+#define MSDriver_DIR_H_GPIO_Port GPIOF
+#define MSDriver_DIR_L_Pin GPIO_PIN_14
+#define MSDriver_DIR_L_GPIO_Port GPIOF
+#define MSDriver_PUL_H_Pin GPIO_PIN_15
+#define MSDriver_PUL_H_GPIO_Port GPIOF
+#define MSDriver_ENA_L_Pin GPIO_PIN_0
+#define MSDriver_ENA_L_GPIO_Port GPIOG
+#define GDM_UP_Pin GPIO_PIN_14
+#define GDM_UP_GPIO_Port GPIOB
+#define GDM_UP_EXTI_IRQn EXTI15_10_IRQn
+#define GDM_DOWN_Pin GPIO_PIN_15
+#define GDM_DOWN_GPIO_Port GPIOB
+#define GDM_DOWN_EXTI_IRQn EXTI15_10_IRQn
+#define MSDriver_PUL_L_Pin GPIO_PIN_12
+#define MSDriver_PUL_L_GPIO_Port GPIOD
 
 /* USER CODE BEGIN Private defines */
 

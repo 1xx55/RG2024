@@ -18,11 +18,12 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "MSDriver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,7 +55,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int cnt=0;
 /* USER CODE END 0 */
 
 /**
@@ -85,7 +86,14 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_TIM4_Init();
+  MX_TIM1_Init();
+  MX_TIM3_Init();
+  MX_TIM5_Init();
+  MX_TIM8_Init();
+  MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
+  MS_Init();
 
   /* USER CODE END 2 */
 
@@ -94,7 +102,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    cnt++;
+    // if(cnt==1000000){
+    //   MS_GO();
+    // }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -147,7 +158,13 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_PIN){
+    GDM_EXTI(GPIO_PIN);
+}
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+    ACC_TIM14_IT(htim);
+}
 /* USER CODE END 4 */
 
 /**

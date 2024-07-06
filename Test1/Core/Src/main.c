@@ -149,7 +149,7 @@ int main(void)
     
     }
     if(count == 600000){ //1/T平滑
-     __HAL_TIM_SET_AUTORELOAD(&htim4,200); //200us
+     __HAL_TIM_SET_AUTORELOAD(&htim4,200); //2100us
      __HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_1,100); 
     //__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,790);
     }

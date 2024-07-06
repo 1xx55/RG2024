@@ -1,0 +1,28 @@
+--cpu=Cortex-M4.fp
+"sleepno1\startup_stm32f407xx.o"
+"sleepno1\main.o"
+"sleepno1\gpio.o"
+"sleepno1\tim.o"
+"sleepno1\stm32f4xx_it.o"
+"sleepno1\stm32f4xx_hal_msp.o"
+"sleepno1\stm32f4xx_hal_tim.o"
+"sleepno1\stm32f4xx_hal_tim_ex.o"
+"sleepno1\stm32f4xx_hal_rcc.o"
+"sleepno1\stm32f4xx_hal_rcc_ex.o"
+"sleepno1\stm32f4xx_hal_flash.o"
+"sleepno1\stm32f4xx_hal_flash_ex.o"
+"sleepno1\stm32f4xx_hal_flash_ramfunc.o"
+"sleepno1\stm32f4xx_hal_gpio.o"
+"sleepno1\stm32f4xx_hal_dma_ex.o"
+"sleepno1\stm32f4xx_hal_dma.o"
+"sleepno1\stm32f4xx_hal_pwr.o"
+"sleepno1\stm32f4xx_hal_pwr_ex.o"
+"sleepno1\stm32f4xx_hal_cortex.o"
+"sleepno1\stm32f4xx_hal.o"
+"sleepno1\stm32f4xx_hal_exti.o"
+"sleepno1\system_stm32f4xx.o"
+"sleepno1\msdriver.o"
+--strict --scatter "SleepNO1\SleepNO1.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "SleepNO1.map" -o SleepNO1\SleepNO1.axf
