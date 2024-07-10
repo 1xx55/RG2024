@@ -30,4 +30,12 @@ sleepno1\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 sleepno1\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 sleepno1\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 sleepno1\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+sleepno1\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sleepno1\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
+sleepno1\stm32f4xx_it.o: ../User/Chassis/Chassis.hpp
+sleepno1\stm32f4xx_it.o: ../User/Chassis/Motor.hpp
+sleepno1\stm32f4xx_it.o: ../User/Chassis/PID.hpp
+sleepno1\stm32f4xx_it.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\limits.h
+sleepno1\stm32f4xx_it.o: ../User/Shoot/MSDriver.h
+sleepno1\stm32f4xx_it.o: ../Core/Inc/gpio.h
+sleepno1\stm32f4xx_it.o: ../Core/Inc/tim.h

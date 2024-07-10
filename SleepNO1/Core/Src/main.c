@@ -19,11 +19,17 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "MSDriver.h"
+#include "fix_pos_dj.h"
+#include "MoCaLun.h"
+#include "Chassis.hpp"
+#include "my_servo.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,7 +50,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+Class_Chassis Chassis;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -87,25 +93,85 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM4_Init();
-  MX_TIM1_Init();
-  MX_TIM3_Init();
   MX_TIM5_Init();
-  MX_TIM8_Init();
   MX_TIM14_Init();
+  MX_TIM13_Init();
+  MX_TIM3_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   MS_Init();
+  FIX_POS_DJ_Init();
+  MOCALUN_Init();
+  
+//---------------------------------底盘调试代码------------------------------------------------------
+  // HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
+  // //底盘初始
+  // Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
+  // Chassis.Set_Control_Method(Control_Method_OPENLOOP);     //Control_Method_OMEGA   OPENLOOP
 
+  // //使能计算时钟
+  // HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
+
+
+  // SpeedTypeDef v_front=
+  // {
+  //   0, 0.5, 0,  0,0,0,0
+  // };
+  // SpeedTypeDef v_back=
+  // {
+  //   0, -0.5, 0,  0,0,0,0
+  // };
+  // SpeedTypeDef v_right=
+  // {
+  //   0.5, 0, 0,   0,0,0,0
+  // };  
+  // SpeedTypeDef v_left=
+  // {
+  //   -0.8, 0, 0,   0,0,0,0
+  // }; 
+  // SpeedTypeDef v_rotate=
+  // {
+  //   0, 0, 0.8,    0,0,0,0
+  // };
+  // SpeedTypeDef v_crotate=
+  // {
+  //   0, 0, -1,    0,0,0,0
+  // };
+  // SpeedTypeDef v_stop=
+  // {
+  //   0, 0, 0,    0,0,0,0
+  // };
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    //---------------------------------底盘调试代码------------------------------------------------------
+  //  Chassis.Set_Velocity(v_stop);
+  //  HAL_Delay(2000);
+  //  Chassis.Set_Velocity(v_back);
+  //  HAL_Delay(2000);
+	// 	Chassis.Set_Velocity(v_front);
+  //  HAL_Delay(2000);
+  //  Chassis.Set_Velocity(v_right);
+  //  HAL_Delay(2000);
+  //  Chassis.Set_Velocity(v_rotate);
+  //  HAL_Delay(2000);
+  //  Chassis.Set_Velocity(v_crotate);
+  //  HAL_Delay(2000);
+  //  Chassis.Set_Velocity(v_left);
+  //  HAL_Delay(2000);
+  //  Chassis.Set_Velocity(v_back);
+  //  HAL_Delay(2000);
+  // ---------------------------------机械臂调试代�?-----------------------------------------------------
+  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
+  HAL_Delay(2000);
+  SERVOCMD_MOVE_TIME_WRITE(4,1000,1000);
+  HAL_Delay(2000);
+
     /* USER CODE END WHILE */
-    cnt++;
-    // if(cnt==1000000){
-    //   MS_GO();
-    // }
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -158,13 +224,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_PIN){
-    GDM_EXTI(GPIO_PIN);
-}
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-    ACC_TIM14_IT(htim);
-}
 /* USER CODE END 4 */
 
 /**

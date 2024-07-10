@@ -9,11 +9,12 @@
 
 
 // function declarations
+void MS_Init();
 
 void MS_GO();
 void MS_GO_UP();
 void MS_GO_DOWN();
-void MS_Init();
+
 
 // specials
 // 需要放入 HAL_GPIO_EXTI_Callback

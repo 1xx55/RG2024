@@ -281,7 +281,7 @@ void SystemClock_Config(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_PIN){
   switch (GPIO_PIN)
   {
-  case GPIO_PIN_14://上面那个光电门 //笔记：启动时会莫名触发中断
+  case GPIO_PIN_14://上面那个光电�? //笔记：启动时会莫名触发中�?
     {
       //stop = 1;
       if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_14)==GPIO_PIN_SET && HAL_GPIO_ReadPin(DIR__GPIO_Port,DIR__Pin)==GPIO_PIN_RESET){ //must
