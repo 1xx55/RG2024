@@ -25,7 +25,7 @@
 const float WHEEL_RADIUS = 0.075f;
 
 //轮组满转线速度, m/s
-const float WHEEL_FULL_V = (MOTOR_FULL_OMEGA * WHEEL_RADIUS);
+const float WHEEL_FULL_V = (MOTOR_FULL_OMEGA * WHEEL_RADIUS);  // about 1.3m/s
 
 //omega到m/s映射系数, (横轮距+纵轮距)/2, m/rad
 const float OMEGA_TO_MS = ((0.500f + 0.355f) / 2);      //实际0.5006f

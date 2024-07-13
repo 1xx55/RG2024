@@ -20,7 +20,7 @@
 /* Exported macros -----------------------------------------------------------*/
 
 //PID定时器周期, s
-const float PID_CALCULATE_PERIOD = 0.1f;
+const float PID_CALCULATE_PERIOD = 0.01f;
 
 /* Exported types ------------------------------------------------------------*/
 

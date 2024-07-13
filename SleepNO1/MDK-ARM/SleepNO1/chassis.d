@@ -33,5 +33,6 @@ sleepno1\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 sleepno1\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 sleepno1\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sleepno1\chassis.o: ..\User\Chassis\Motor.hpp
+sleepno1\chassis.o: ../Core/Inc/usart.h
 sleepno1\chassis.o: ..\User\Chassis\PID.hpp
 sleepno1\chassis.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\limits.h

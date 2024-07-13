@@ -107,7 +107,7 @@ int main(void)
   // HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
   // //底盘初始
   // Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
-  // Chassis.Set_Control_Method(Control_Method_OPENLOOP);     //Control_Method_OMEGA   OPENLOOP
+  // Chassis.Set_Control_Method(Control_Method_OMEGA);     //Control_Method_OMEGA   OPENLOOP
 
   // //使能计算时钟
   // HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
@@ -115,27 +115,27 @@ int main(void)
 
   // SpeedTypeDef v_front=
   // {
-  //   0, 0.5, 0,  0,0,0,0
+  //   0, 0.2, 0,  0,0,0,0
   // };
   // SpeedTypeDef v_back=
   // {
-  //   0, -0.5, 0,  0,0,0,0
+  //   0, -0.2, 0,  0,0,0,0
   // };
   // SpeedTypeDef v_right=
   // {
-  //   0.5, 0, 0,   0,0,0,0
+  //   0.2, 0, 0,   0,0,0,0
   // };  
   // SpeedTypeDef v_left=
   // {
-  //   -0.8, 0, 0,   0,0,0,0
+  //   -0.2, 0, 0,   0,0,0,0
   // }; 
   // SpeedTypeDef v_rotate=
   // {
-  //   0, 0, 0.8,    0,0,0,0
+  //   0, 0, 0.5,    0,0,0,0
   // };
   // SpeedTypeDef v_crotate=
   // {
-  //   0, 0, -1,    0,0,0,0
+  //   0, 0, -0.5,    0,0,0,0
   // };
   // SpeedTypeDef v_stop=
   // {
@@ -149,13 +149,13 @@ int main(void)
   {
     //---------------------------------底盘调试代码------------------------------------------------------
   //  Chassis.Set_Velocity(v_stop);
-  //  HAL_Delay(2000);
+  //  HAL_Delay(2000); 
   //  Chassis.Set_Velocity(v_back);
-  //  HAL_Delay(2000);
-	// 	Chassis.Set_Velocity(v_front);
-  //  HAL_Delay(2000);
+  //  HAL_Delay(2000); 
+	//  Chassis.Set_Velocity(v_front);
+  //  HAL_Delay(2000); 
   //  Chassis.Set_Velocity(v_right);
-  //  HAL_Delay(2000);
+  //  HAL_Delay(2000); 
   //  Chassis.Set_Velocity(v_rotate);
   //  HAL_Delay(2000);
   //  Chassis.Set_Velocity(v_crotate);
@@ -164,9 +164,11 @@ int main(void)
   //  HAL_Delay(2000);
   //  Chassis.Set_Velocity(v_back);
   //  HAL_Delay(2000);
-  // ---------------------------------机械臂调试代�?-----------------------------------------------------
+  // ---------------------------------机械臂调试代�?????-----------------------------------------------------
   SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
+  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
   HAL_Delay(2000);
+  SERVOCMD_MOVE_TIME_WRITE(3,800,1000);
   SERVOCMD_MOVE_TIME_WRITE(4,1000,1000);
   HAL_Delay(2000);
 

@@ -34,6 +34,7 @@ sleepno1\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.
 sleepno1\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
 sleepno1\stm32f4xx_it.o: ../User/Chassis/Chassis.hpp
 sleepno1\stm32f4xx_it.o: ../User/Chassis/Motor.hpp
+sleepno1\stm32f4xx_it.o: ../Core/Inc/usart.h
 sleepno1\stm32f4xx_it.o: ../User/Chassis/PID.hpp
 sleepno1\stm32f4xx_it.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\limits.h
 sleepno1\stm32f4xx_it.o: ../User/Shoot/MSDriver.h

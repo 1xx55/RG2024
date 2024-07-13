@@ -62,17 +62,17 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define Pin_Pushpull_MotorDirectionA1_Pin GPIO_PIN_2
-#define Pin_Pushpull_MotorDirectionA1_GPIO_Port GPIOE
-#define Pin_Pushpull_MotorDirectionB1_Pin GPIO_PIN_3
+#define Pin_Pushpull_MotorDirectionB1_Pin GPIO_PIN_2
 #define Pin_Pushpull_MotorDirectionB1_GPIO_Port GPIOE
+#define Pin_Pushpull_MotorDirectionA1_Pin GPIO_PIN_3
+#define Pin_Pushpull_MotorDirectionA1_GPIO_Port GPIOE
 #define Pin_Pushpull_MotorDirectionA2_Pin GPIO_PIN_4
 #define Pin_Pushpull_MotorDirectionA2_GPIO_Port GPIOE
 #define Pin_Pushpull_MotorDirectionB2_Pin GPIO_PIN_5
 #define Pin_Pushpull_MotorDirectionB2_GPIO_Port GPIOE
-#define Pin_PullDown_HallEncoderB1_Pin GPIO_PIN_14
-#define Pin_PullDown_HallEncoderB1_GPIO_Port GPIOC
-#define Pin_PullDown_HallEncoderB2_Pin GPIO_PIN_15
+#define Pin_PullDown_HallEncoderB1_Pin GPIO_PIN_6
+#define Pin_PullDown_HallEncoderB1_GPIO_Port GPIOE
+#define Pin_PullDown_HallEncoderB2_Pin GPIO_PIN_13
 #define Pin_PullDown_HallEncoderB2_GPIO_Port GPIOC
 #define Pin_Exti_HallEncoderA1_Pin GPIO_PIN_0
 #define Pin_Exti_HallEncoderA1_GPIO_Port GPIOF
@@ -108,24 +108,24 @@ void Error_Handler(void);
 #define MCL_LEFT_GPIO_Port GPIOD
 #define MCL_RIGHT_Pin GPIO_PIN_14
 #define MCL_RIGHT_GPIO_Port GPIOD
-#define Pin_PushDJQD3V3_3_Pin GPIO_PIN_13
+#define Pin_PushDJQD3V3_4_Pin GPIO_PIN_13
+#define Pin_PushDJQD3V3_4_GPIO_Port GPIOG
+#define Pin_PushDJQD3V3_3_Pin GPIO_PIN_15
 #define Pin_PushDJQD3V3_3_GPIO_Port GPIOG
-#define Pin_PushDJQD3V3_3G15_Pin GPIO_PIN_15
-#define Pin_PushDJQD3V3_3G15_GPIO_Port GPIOG
 #define Pin_Exti_HallEncoderA4_Pin GPIO_PIN_3
 #define Pin_Exti_HallEncoderA4_GPIO_Port GPIOB
 #define Pin_Exti_HallEncoderA4_EXTI_IRQn EXTI3_IRQn
 #define Pin_Exti_HallEncoderA3_Pin GPIO_PIN_4
 #define Pin_Exti_HallEncoderA3_GPIO_Port GPIOB
 #define Pin_Exti_HallEncoderA3_EXTI_IRQn EXTI4_IRQn
-#define Pin_Pushpull_MotorDirectionB4_Pin GPIO_PIN_5
-#define Pin_Pushpull_MotorDirectionB4_GPIO_Port GPIOB
-#define Pin_Pushpull_MotorDirectionA4_Pin GPIO_PIN_6
+#define Pin_Pushpull_MotorDirectionA4_Pin GPIO_PIN_5
 #define Pin_Pushpull_MotorDirectionA4_GPIO_Port GPIOB
-#define Pin_Pushpull_MotorDirectionB3_Pin GPIO_PIN_7
-#define Pin_Pushpull_MotorDirectionB3_GPIO_Port GPIOB
-#define Pin_Pushpull_MotorDirectionA3_Pin GPIO_PIN_8
+#define Pin_Pushpull_MotorDirectionB4_Pin GPIO_PIN_6
+#define Pin_Pushpull_MotorDirectionB4_GPIO_Port GPIOB
+#define Pin_Pushpull_MotorDirectionA3_Pin GPIO_PIN_7
 #define Pin_Pushpull_MotorDirectionA3_GPIO_Port GPIOB
+#define Pin_Pushpull_MotorDirectionB3_Pin GPIO_PIN_8
+#define Pin_Pushpull_MotorDirectionB3_GPIO_Port GPIOB
 #define Pin_PullDown_HallEncoderB4_Pin GPIO_PIN_0
 #define Pin_PullDown_HallEncoderB4_GPIO_Port GPIOE
 #define Pin_PullDown_HallEncoderB3_Pin GPIO_PIN_1

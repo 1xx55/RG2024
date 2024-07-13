@@ -13,6 +13,7 @@
 
 #include "Motor.hpp"
 
+
 /* Private macros ------------------------------------------------------------*/
 
 /* Private types -------------------------------------------------------------*/
@@ -318,6 +319,7 @@ void Class_Motor_With_Hall_Encoder::Calculate_TIM_PeriodElapsedCallback()
     {
         //开环控制直接输出速度
         Out = Omega_Target * Motor_PWM_Period / Motor_Full_Omega;
+
     }
     else if(Control_Method == Control_Method_OMEGA)
     {
