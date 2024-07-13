@@ -29,6 +29,7 @@
 #include "MoCaLun.h"
 #include "Chassis.hpp"
 #include "my_servo.h"
+#include "camera_pos_dj.h"
 
 /* USER CODE END Includes */
 
@@ -70,6 +71,7 @@ int cnt=0;
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -98,10 +100,12 @@ int main(void)
   MX_TIM13_Init();
   MX_TIM3_Init();
   MX_USART2_UART_Init();
+  MX_TIM11_Init();
   /* USER CODE BEGIN 2 */
   MS_Init();
   FIX_POS_DJ_Init();
   MOCALUN_Init();
+	CAMERA_POS_DJ_Init();
   
 //---------------------------------底盘调试代码------------------------------------------------------
   // HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
@@ -164,17 +168,36 @@ int main(void)
   //  HAL_Delay(2000);
   //  Chassis.Set_Velocity(v_back);
   //  HAL_Delay(2000);
-  // ---------------------------------机械臂调试代�?????-----------------------------------------------------
-  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
-  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
-  HAL_Delay(2000);
-  SERVOCMD_MOVE_TIME_WRITE(3,800,1000);
-  SERVOCMD_MOVE_TIME_WRITE(4,1000,1000);
-  HAL_Delay(2000);
-
+  // ---------------------------------机械臂调试代�??????-----------------------------------------------------
+//  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
+//  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
+//  HAL_Delay(2000);
+//  SERVOCMD_MOVE_TIME_WRITE(3,800,1000);
+//  SERVOCMD_MOVE_TIME_WRITE(4,1000,1000);
+//  HAL_Delay(2000);
+// ---------------------------------Camera_Pos_DJ-----------------------------------------------------
+   CAMERA_POS_DJ_ANGLE(0);
+	 HAL_Delay(2000);
+   CAMERA_POS_DJ_ANGLE(45);
+	 HAL_Delay(2000);
+	 CAMERA_POS_DJ_ANGLE(90);
+   HAL_Delay(2000);
+   CAMERA_POS_DJ_ANGLE(135);
+	 HAL_Delay(2000);
+	   CAMERA_POS_DJ_ANGLE(180);
+	 HAL_Delay(2000);
+   CAMERA_POS_DJ_ANGLE(225);
+	 HAL_Delay(2000);
+	 CAMERA_POS_DJ_ANGLE(270);
+   HAL_Delay(2000);
+   CAMERA_POS_DJ_ANGLE(315);
+	 HAL_Delay(2000);
+	 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		
+		
   }
   /* USER CODE END 3 */
 }

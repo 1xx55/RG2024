@@ -849,11 +849,11 @@ erwork --depend=sleepno1\startup_stm32f407xx.d -osleepno1\startup_stm32f407xx.o
 ARM Macro Assembler    Page 14 
 
 
- -I.\RTE\_SleepNO1 -ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include 
--ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32
-F4xx\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 52
-6" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --list=startup_s
-tm32f407xx.lst startup_stm32f407xx.s
+ -I.\RTE\_SleepNO1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include -IC
+:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\I
+nclude --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 526" --p
+redefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --list=startup_stm32f4
+07xx.lst startup_stm32f407xx.s
 
 
 

@@ -80,6 +80,8 @@ void Error_Handler(void);
 #define Pin_Exti_HallEncoderA2_Pin GPIO_PIN_1
 #define Pin_Exti_HallEncoderA2_GPIO_Port GPIOF
 #define Pin_Exti_HallEncoderA2_EXTI_IRQn EXTI1_IRQn
+#define CAMERA_POS_DJ_Pin GPIO_PIN_7
+#define CAMERA_POS_DJ_GPIO_Port GPIOF
 #define FIX_POS_DJ_Pin GPIO_PIN_8
 #define FIX_POS_DJ_GPIO_Port GPIOF
 #define MSDriver_ENA_H_Pin GPIO_PIN_11

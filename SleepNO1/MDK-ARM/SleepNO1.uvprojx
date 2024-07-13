@@ -81,7 +81,7 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>0</RunUserProg2>
+            <RunUserProg2>1</RunUserProg2>
             <UserProg1Name></UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
@@ -338,7 +338,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../User/Shoot;../User/JiXieBi;../User/Chassis</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../User/Shoot;../User/JiXieBi;../User/Chassis;..\User\Camera</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -729,6 +729,16 @@
               <FileName>PID.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\User\Chassis\PID.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>User_Camera</GroupName>
+          <Files>
+            <File>
+              <FileName>camera_pos_dj.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Camera\camera_pos_dj.c</FilePath>
             </File>
           </Files>
         </Group>

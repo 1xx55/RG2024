@@ -5,11 +5,11 @@
 <h2>Tool Versions:</h2>
 IDE-Version: ��Vision V5.26.2.0
 Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Y YH, USTC, LIC=----
+License Information: 111 222, 333, LIC=----
  
 Tool Versions:
 Toolchain:       MDK-Lite  Version: 5.26.2.0
-Toolchain Path:  D:\rmSoftware\ARM\ARMCC\Bin
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 6 (build 750)
 Assembler:       Armasm.exe V5.06 update 6 (build 750)
 Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
@@ -21,20 +21,28 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.5.0
 Dialog DLL:      TCM.DLL V1.36.1.0
  
 <h2>Project:</h2>
-d:\Robo-electro\RG2024\RG2024\SleepNO1\MDK-ARM\SleepNO1.uvprojx
-Project File Date:  07/11/2024
+C:\Users\deng2\Desktop\ROBOCODE\SleepNo1\RG2024\SleepNO1\MDK-ARM\SleepNO1.uvprojx
+Project File Date:  07/13/2024
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\rmSoftware\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'SleepNO1'
-compiling main.c...
-../Core/Src/main.c(167): warning:  #2532-D: support for trigraphs is disabled
-    // ---------------------------------机械臂调试代�??????-----------------------------------------------------
-../Core/Src/main.c: 1 warning, 0 errors
+compiling camera_pos_dj.c...
+..\User\Camera\camera_pos_dj.c(12): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    __HAL_TIM_SetCompare(&htim11,TIM_CHANNEL_1,(int)(500+(float)(angle)/360.0*2000.0) );
+..\User\Camera\camera_pos_dj.c(12): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    __HAL_TIM_SetCompare(&htim11,TIM_CHANNEL_1,(int)(500+(float)(angle)/360.0*2000.0) );
+..\User\Camera\camera_pos_dj.c(12): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    __HAL_TIM_SetCompare(&htim11,TIM_CHANNEL_1,(int)(500+(float)(angle)/360.0*2000.0) );
+..\User\Camera\camera_pos_dj.c(12): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    __HAL_TIM_SetCompare(&htim11,TIM_CHANNEL_1,(int)(500+(float)(angle)/360.0*2000.0) );
+..\User\Camera\camera_pos_dj.c(14): warning:  #1-D: last line of file ends without a newline
+  }
+..\User\Camera\camera_pos_dj.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=17012 RO-data=468 RW-data=68 ZI-data=3828  
+Program Size: Code=17076 RO-data=468 RW-data=68 ZI-data=3868  
 FromELF: creating hex file...
-"SleepNO1\SleepNO1.axf" - 0 Error(s), 1 Warning(s).
+"SleepNO1\SleepNO1.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,13 +59,13 @@ Package Vendor: Keil
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_SleepNO1
-  D:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include
-  D:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include
+  C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.1.2
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
