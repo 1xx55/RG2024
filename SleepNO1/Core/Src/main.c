@@ -98,6 +98,7 @@ int main(void)
   MX_TIM13_Init();
   MX_TIM3_Init();
   MX_USART2_UART_Init();
+  MX_TIM11_Init();
   /* USER CODE BEGIN 2 */
   MS_Init();
   FIX_POS_DJ_Init();
@@ -164,7 +165,7 @@ int main(void)
   //  HAL_Delay(2000);
   //  Chassis.Set_Velocity(v_back);
   //  HAL_Delay(2000);
-  // ---------------------------------机械臂调试代�?????-----------------------------------------------------
+  // ---------------------------------机械臂调试代�??????-----------------------------------------------------
   SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
   SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
   HAL_Delay(2000);
