@@ -42,3 +42,5 @@ sleepno1\main.o: ../User/Chassis/Motor.hpp
 sleepno1\main.o: ../User/Chassis/PID.hpp
 sleepno1\main.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\limits.h
 sleepno1\main.o: ../User/JiXieBi/my_servo.h
+sleepno1\main.o: ..\User\Camera\camera_pos_dj.h
+sleepno1\main.o: ../User/JiXieBi/air_pump.h

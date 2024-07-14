@@ -1,0 +1,7 @@
+/MDK-ARM/*
+!/MDK-ARM/f407_ustc_2022_robogame.uvoptx
+!/MDK-ARM/f407_ustc_2022_robogame.uvprojx
+!/MDK-ARM/startup_stm32f407xx.s
+/.idea
+start.cmd
+workspace.code-workspace
