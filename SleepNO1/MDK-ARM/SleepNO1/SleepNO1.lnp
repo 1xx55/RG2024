@@ -26,6 +26,7 @@
 "sleepno1\msdriver.o"
 "sleepno1\fix_pos_dj.o"
 "sleepno1\mocalun.o"
+"sleepno1\shoot.o"
 "sleepno1\my_servo.o"
 "sleepno1\air_pump.o"
 "sleepno1\chassis.o"

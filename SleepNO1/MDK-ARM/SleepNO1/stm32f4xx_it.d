@@ -37,6 +37,9 @@ sleepno1\stm32f4xx_it.o: ../User/Chassis/Motor.hpp
 sleepno1\stm32f4xx_it.o: ../Core/Inc/usart.h
 sleepno1\stm32f4xx_it.o: ../User/Chassis/PID.hpp
 sleepno1\stm32f4xx_it.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\limits.h
-sleepno1\stm32f4xx_it.o: ../User/Shoot/MSDriver.h
+sleepno1\stm32f4xx_it.o: ../User/Shoot/Shoot.h
+sleepno1\stm32f4xx_it.o: ../User/Shoot/MoCaLun.h
 sleepno1\stm32f4xx_it.o: ../Core/Inc/gpio.h
 sleepno1\stm32f4xx_it.o: ../Core/Inc/tim.h
+sleepno1\stm32f4xx_it.o: ../User/Shoot/MSDriver.h
+sleepno1\stm32f4xx_it.o: ../User/Shoot/fix_pos_dj.h

@@ -1,2 +1,4 @@
-Load "SleepNO1\\SleepNO1.axf" 
-Erase Done.Programming Done.Verify OK.Flash Load finished at 19:33:03
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\rmSoftware\ARM\ARMCC\Bin'
+Build target 'SleepNO1'
+"SleepNO1\SleepNO1.axf" - 0 Error(s), 0 Warning(s).
+Build Time Elapsed:  00:00:00

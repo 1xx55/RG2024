@@ -9,6 +9,6 @@ void CAMERA_POS_DJ_Init(){
 }
 
 void CAMERA_POS_DJ_ANGLE(int angle){
-  __HAL_TIM_SetCompare(&htim11,TIM_CHANNEL_1,(int)(500+(float)(angle)/360.0*2000.0) );
+  __HAL_TIM_SetCompare(&htim11,TIM_CHANNEL_1,(int)(500.0+(double)(angle)/360.0*2000.0) );
 	
 }

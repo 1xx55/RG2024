@@ -24,9 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "MSDriver.h"
-#include "fix_pos_dj.h"
-#include "MoCaLun.h"
+#include "Shoot.h"
 #include "Chassis.hpp"
 #include "my_servo.h"
 #include "camera_pos_dj.h"
@@ -63,7 +61,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int cnt=0;
+uint32_t cnt=0;
 /* USER CODE END 0 */
 
 /**
@@ -102,10 +100,10 @@ int main(void)
   MX_TIM3_Init();
   MX_USART2_UART_Init();
   MX_TIM11_Init();
+  MX_TIM10_Init();
+  MX_TIM8_Init();
   /* USER CODE BEGIN 2 */
-  MS_Init();
-  FIX_POS_DJ_Init();
-  MOCALUN_Init();
+  SHOOT_Init();
 	CAMERA_POS_DJ_Init();
   
 //---------------------------------底盘调试代码------------------------------------------------------
@@ -154,11 +152,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    AIR_PUMP_OPEN();
-    HAL_Delay(10000);
-    AIR_PUMP_CLOSE();
-    HAL_Delay(3000);
-    
+    SHOOT_TASK_Schedule();
+    if(cnt == 1000000) SHOOT_START();
+    cnt++;
+    // MOCALUN_start(750);
+    // HAL_Delay(3000);
+    // MOCALUN_stop();
+    // HAL_Delay(2000);
     //---------------------------------底盘调试代码------------------------------------------------------
   //  Chassis.Set_Velocity(v_stop);
   //  HAL_Delay(2000); 
@@ -176,7 +176,7 @@ int main(void)
   //  HAL_Delay(2000);
   //  Chassis.Set_Velocity(v_back);
   //  HAL_Delay(2000);
-  // ---------------------------------机械臂调试代�???????-----------------------------------------------------
+  // ---------------------------------机械臂调试代�??????????-----------------------------------------------------
 //  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
 //  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
 //  HAL_Delay(2000);

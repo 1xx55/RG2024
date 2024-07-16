@@ -34,13 +34,14 @@ sleepno1\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sleepno1\main.o: ../Core/Inc/tim.h
 sleepno1\main.o: ../Core/Inc/usart.h
 sleepno1\main.o: ../Core/Inc/gpio.h
+sleepno1\main.o: ../User/Shoot/Shoot.h
+sleepno1\main.o: ../User/Shoot/MoCaLun.h
 sleepno1\main.o: ../User/Shoot/MSDriver.h
 sleepno1\main.o: ../User/Shoot/fix_pos_dj.h
-sleepno1\main.o: ../User/Shoot/MoCaLun.h
 sleepno1\main.o: ../User/Chassis/Chassis.hpp
 sleepno1\main.o: ../User/Chassis/Motor.hpp
 sleepno1\main.o: ../User/Chassis/PID.hpp
 sleepno1\main.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\limits.h
 sleepno1\main.o: ../User/JiXieBi/my_servo.h
-sleepno1\main.o: ..\User\Camera\camera_pos_dj.h
+sleepno1\main.o: ../User/Camera/camera_pos_dj.h
 sleepno1\main.o: ../User/JiXieBi/air_pump.h
