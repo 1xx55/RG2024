@@ -20,6 +20,7 @@ void MS_GO_DOWN();
 // 需要放入 HAL_GPIO_EXTI_Callback
 void GDM_EXTI(uint16_t GPIO_PIN);
 
-// 需要放入 HAL_TIM_PeriodElapsedCallback
-void ACC_TIM14_IT(TIM_HandleTypeDef *htim);
+// 需要放入 Task
+void ACC_TIM14_IT();
+void ACC_TASK_SCHEDULE();
 #endif

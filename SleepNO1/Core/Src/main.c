@@ -29,6 +29,7 @@
 #include "my_servo.h"
 #include "camera_pos_dj.h"
 #include "air_pump.h"
+#include "Task.h"
 
 /* USER CODE END Includes */
 
@@ -100,17 +101,17 @@ int main(void)
   MX_TIM3_Init();
   MX_USART2_UART_Init();
   MX_TIM11_Init();
-  MX_TIM10_Init();
   MX_TIM8_Init();
   /* USER CODE BEGIN 2 */
+  Task_TIM_Init(); //first!
   SHOOT_Init();
 	CAMERA_POS_DJ_Init();
-  
+  AIR_PUMP_Init();
 //---------------------------------底盘调试代码------------------------------------------------------
   // HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
   // //底盘初始
   // Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
-  // Chassis.Set_Control_Method(Control_Method_OMEGA);     //Control_Method_OMEGA   OPENLOOP
+  // Chassis.Set_Control_Method(Control_Method_OPENLOOP);     //Control_Method_OMEGA   OPENLOOP
 
   // //使能计算时钟
   // HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
@@ -118,33 +119,33 @@ int main(void)
 
   // SpeedTypeDef v_front=
   // {
-  //   0, 0.2, 0,  0,0,0,0
+  //   0, 0.4, 0,  0,0,0,0
   // };
   // SpeedTypeDef v_back=
   // {
-  //   0, -0.2, 0,  0,0,0,0
+  //   0, -0.4, 0,  0,0,0,0
   // };
   // SpeedTypeDef v_right=
   // {
-  //   0.2, 0, 0,   0,0,0,0
+  //   0.4, 0, 0,   0,0,0,0
   // };  
   // SpeedTypeDef v_left=
   // {
-  //   -0.2, 0, 0,   0,0,0,0
+  //   -0.4, 0, 0,   0,0,0,0
   // }; 
   // SpeedTypeDef v_rotate=
   // {
-  //   0, 0, 0.5,    0,0,0,0
+  //   0, 0, 1.0,    0,0,0,0
   // };
   // SpeedTypeDef v_crotate=
   // {
-  //   0, 0, -0.5,    0,0,0,0
+  //   0, 0, -1.0,    0,0,0,0
   // };
   // SpeedTypeDef v_stop=
   // {
   //   0, 0, 0,    0,0,0,0
   // };
-  AIR_PUMP_Init();
+  
   
   /* USER CODE END 2 */
 
@@ -152,7 +153,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    SHOOT_TASK_Schedule();
+    Task_Schedule();
     if(cnt == 1000000) SHOOT_START();
     cnt++;
     // MOCALUN_start(750);
@@ -176,7 +177,7 @@ int main(void)
   //  HAL_Delay(2000);
   //  Chassis.Set_Velocity(v_back);
   //  HAL_Delay(2000);
-  // ---------------------------------机械臂调试代�??????????-----------------------------------------------------
+  // ---------------------------------机械臂调试代�????????????????-----------------------------------------------------
 //  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
 //  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
 //  HAL_Delay(2000);

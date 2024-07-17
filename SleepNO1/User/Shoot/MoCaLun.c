@@ -8,7 +8,7 @@
 #define TMCH2 TIM_CHANNEL_2
 
 void MOCALUN_start(int speed_param){
-    //speed_param: 350,375,400 三档速度
+    //speed_param: 速度参数.(蜜汁)
     __HAL_TIM_SetCompare(&TMPORT1,TMCH1,speed_param*2);
     __HAL_TIM_SetCompare(&TMPORT2,TMCH2,speed_param*2);
 }
@@ -24,7 +24,7 @@ void MOCALUN_Init(){
     MOCALUN_start(250);
     HAL_TIM_PWM_Start(&TMPORT1,TMCH1);
     HAL_TIM_PWM_Start(&TMPORT2,TMCH2);
-    HAL_Delay(3000);
+    HAL_Delay(3000);//3s
     MOCALUN_stop();
 }
 

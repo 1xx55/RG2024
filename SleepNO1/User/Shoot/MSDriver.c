@@ -7,10 +7,9 @@ typedef enum{
 } DIR_status; //定义方向枚举变量，便于编程
 
 // 加速部分使用参数
-int acc_cnt = 0, acc_id = 0;
+int acc_cnt = 66, acc_id = 66;
 //单位1ms 设置特定加速的时间
-int acc_time[11]={10,20,30,40,50,60,70,80,90,100,110};
-
+int acc_time[11]={1,2,3,4,5,6,7,8,9,10,11};
 
 //functions
 
@@ -75,8 +74,8 @@ void MS_GO(){
     //如果已经在动 不开启新的go
     if(HAL_GPIO_ReadPin(MSDriver_ENA_L_GPIO_Port,MSDriver_ENA_L_Pin) == GPIO_PIN_SET)return;
     //开始移动，直到中断触发停止。加速过程计数由定时器完成，不占用系统时钟资源
-    //加速计时器启动。
-    HAL_TIM_Base_Start_IT(&htim14);
+    //
+    //HAL_TIM_Base_Start_IT(&htim14);
     //参数初始化
     acc_cnt = 0; acc_id=0;
     //设置初始速度
@@ -97,15 +96,14 @@ void MS_GO_DOWN(){
     MS_GO();
 }
 
-void ACC_TIM14_IT(TIM_HandleTypeDef *htim){
-    if(htim != &htim14)return;
-    acc_cnt++;
-    if(acc_id < 10 && acc_cnt == acc_time[acc_id]){
+void ACC_TIM14_IT(){
+    if(acc_id < 10)acc_cnt++; 
+}
+
+void ACC_TASK_SCHEDULE(){
+    if(acc_id < 10 && acc_cnt >= acc_time[acc_id]){
         set_acc_speed(acc_id+1);
-        acc_id++;
-    }
-    else if(acc_id == 10){
-        HAL_TIM_Base_Stop_IT(&htim14);
+        acc_id++;   
     }
 }
 
@@ -125,7 +123,11 @@ void MS_Init(){
 
     //复位:如果不在底端，方向朝下运动到停止。
     if(HAL_GPIO_ReadPin(GDM_DOWN_GPIO_Port,GDM_DOWN_Pin) == GPIO_PIN_RESET){
-        set_dir(DIR_DOWN);
-        MS_GO();
+        HAL_Delay(10);
+        MS_GO_DOWN();
+        while(HAL_GPIO_ReadPin(GDM_DOWN_GPIO_Port,GDM_DOWN_Pin) == GPIO_PIN_RESET){ //不在底部
+            //初始化时因为不在main函数里面 只能这样加速了
+            ACC_TASK_SCHEDULE();
+        }
     }
 }

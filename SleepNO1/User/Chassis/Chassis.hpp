@@ -32,11 +32,11 @@ const float OMEGA_TO_MS = ((0.500f + 0.355f) / 2);      //实际0.5006f
 
 //绝对速度限制, 任何情况不能超过
 //横移速度上限, m/s
-const float X_MAX = 1.0f;    
+const float X_MAX = 1.5f;    
 //前进速度上限, m/s
-const float Y_MAX = 1.0f;    
+const float Y_MAX = 1.5f;    
 //旋转速度上限, rad/s
-const float OMEGA_MAX = 2.0f; 
+const float OMEGA_MAX = 3.0f; 
 
 //巡线相关参数
 const float Kp_X4Y = 0.01;

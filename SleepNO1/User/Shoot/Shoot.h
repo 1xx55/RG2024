@@ -9,10 +9,9 @@
 
 // macros
 // shoot tim:10ms
-#define SHOOT_TIM htim10
 
 // function declarations
-void SHOOT_TIM_IT(TIM_HandleTypeDef *htim);
+void SHOOT_TIM_IT();
 void SHOOT_START();
 void SHOOT_ABRUPT();
 void SHOOT_set_speed(int speed);

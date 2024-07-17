@@ -4,10 +4,9 @@
 //发射命令.用一个定时器完成
 uint16_t time_counter = 1000;
 int8_t taskid = -1;
-int speed_para = 750;
+int speed_para = 600;
 
-void SHOOT_TIM_IT(TIM_HandleTypeDef *htim){
-    if(htim!=&SHOOT_TIM) return;
+void SHOOT_TIM_IT(){
     if(time_counter > 1000) return; //10s
     //更新计数变量
     time_counter++;
@@ -46,5 +45,4 @@ void SHOOT_Init(){
     MS_Init();
     FIX_POS_DJ_Init();
     MOCALUN_Init();
-    HAL_TIM_Base_Start_IT(&SHOOT_TIM);
 }

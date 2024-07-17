@@ -24,10 +24,10 @@
 const float PI = 3.14159f;
 
 //电机减速后满转转速, rad/s
-const float MOTOR_FULL_OMEGA = (165.0f / 60.0f * 2.0f * PI);        // our额定转速165(r/min) / 60(s/min) * 2pi(rad/r)     空载转速
+const float MOTOR_FULL_OMEGA = (230.0f / 60.0f * 2.0f * PI);        // our额定转速230(r/min) / 60(s/min) * 2pi(rad/r)     空载转速
 
 //电机减速后霍尔编码器编码数, /rad
-const float MOTOR_ENCODER_NUM_PER_RAD = (17.0f *49.0f / 2.0f / PI);     //  编码线数(电机编码器旋转一圈的脉冲数):17  减速比1:49  减速后编码线数:17*49=833
+const float MOTOR_ENCODER_NUM_PER_RAD = (13.0f *27.0f / 2.0f / PI);     //  编码线数(电机编码器旋转一圈的脉冲数):13  减速比1:27  减速后编码线数:13*27=
 
 //电机PWM满占空比对应的数值
 const int32_t MOTOR_CALCULATE_PRESCALER = 32767;
