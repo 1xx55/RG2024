@@ -1,6 +1,6 @@
 Dependencies for Project 'SleepNO1', Target 'SleepNO1': (DO NOT MODIFY !)
-F (startup_stm32f407xx.s)(0x6697A36F)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 526" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1"--list startup_stm32f407xx.lst --xref -o sleepno1\startup_stm32f407xx.o --depend sleepno1\startup_stm32f407xx.d)
-F (../Core/Src/main.c)(0x6697AFEA)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\main.o --omf_browse sleepno1\main.crf --depend sleepno1\main.d)
+F (startup_stm32f407xx.s)(0x6697C3C2)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 526" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1"--list startup_stm32f407xx.lst --xref -o sleepno1\startup_stm32f407xx.o --depend sleepno1\startup_stm32f407xx.d)
+F (../Core/Src/main.c)(0x6697D7DD)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\main.o --omf_browse sleepno1\main.crf --depend sleepno1\main.d)
 I (../Core/Inc/main.h)(0x66951D79)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6693B083)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6693A92A)
@@ -43,10 +43,11 @@ I (../User/Chassis/Chassis.hpp)(0x669777F9)
 I (../User/Chassis/Motor.hpp)(0x6696644F)
 I (../User/Chassis/PID.hpp)(0x668FD009)
 I (D:\rmSoftware\ARM\ARMCC\include\limits.h)(0x599EDB3A)
+I (../User/JiXieBi/JiXieBi.h)(0x6697CE4B)
+I (../User/JiXieBi/air_pump.h)(0x6693B610)
 I (../User/JiXieBi/my_servo.h)(0x668E9512)
 I (../User/Camera/camera_pos_dj.h)(0x6693A92B)
-I (../User/JiXieBi/air_pump.h)(0x6693B610)
-I (../User/Task/Task.h)(0x66971D7D)
+I (../User/Task/Task.h)(0x6697CB36)
 F (../Core/Src/gpio.c)(0x6697A36E)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\gpio.o --omf_browse sleepno1\gpio.crf --depend sleepno1\gpio.d)
 I (../Core/Inc/gpio.h)(0x663B453C)
 I (../Core/Inc/main.h)(0x66951D79)
@@ -80,7 +81,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x6693B083)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x6693B083)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x6693B083)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6693B083)
-F (../Core/Src/tim.c)(0x66978C53)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\tim.o --omf_browse sleepno1\tim.crf --depend sleepno1\tim.d)
+F (../Core/Src/tim.c)(0x6697C3C1)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\tim.o --omf_browse sleepno1\tim.crf --depend sleepno1\tim.d)
 I (../Core/Inc/tim.h)(0x669627B6)
 I (../Core/Inc/main.h)(0x66951D79)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6693B083)
@@ -184,13 +185,16 @@ I (../User/Chassis/Motor.hpp)(0x6696644F)
 I (../Core/Inc/usart.h)(0x668E96F0)
 I (../User/Chassis/PID.hpp)(0x668FD009)
 I (D:\rmSoftware\ARM\ARMCC\include\limits.h)(0x599EDB3A)
-I (../User/Task/Task.h)(0x66971D7D)
+I (../User/Task/Task.h)(0x6697CB36)
 I (../User/Shoot/Shoot.h)(0x66962BFB)
 I (../User/Shoot/MoCaLun.h)(0x668964E7)
 I (../Core/Inc/gpio.h)(0x663B453C)
 I (../Core/Inc/tim.h)(0x669627B6)
 I (../User/Shoot/MSDriver.h)(0x66962A49)
 I (../User/Shoot/fix_pos_dj.h)(0x668964D3)
+I (../User/JiXieBi/JiXieBi.h)(0x6697CE4B)
+I (../User/JiXieBi/air_pump.h)(0x6693B610)
+I (../User/JiXieBi/my_servo.h)(0x668E9512)
 F (../Core/Src/stm32f4xx_hal_msp.c)(0x6693B0A2)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\stm32f4xx_hal_msp.o --omf_browse sleepno1\stm32f4xx_hal_msp.crf --depend sleepno1\stm32f4xx_hal_msp.d)
 I (../Core/Inc/main.h)(0x66951D79)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6693B083)
@@ -893,7 +897,7 @@ I (../Core/Inc/gpio.h)(0x663B453C)
 I (../Core/Inc/tim.h)(0x669627B6)
 I (..\User\Shoot\MSDriver.h)(0x66962A49)
 I (..\User\Shoot\fix_pos_dj.h)(0x668964D3)
-F (..\User\JiXieBi\my_servo.c)(0x668E9702)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\my_servo.o --omf_browse sleepno1\my_servo.crf --depend sleepno1\my_servo.d)
+F (..\User\JiXieBi\my_servo.c)(0x6697CFFA)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\my_servo.o --omf_browse sleepno1\my_servo.crf --depend sleepno1\my_servo.d)
 I (..\User\JiXieBi\my_servo.h)(0x668E9512)
 I (../Core/Inc/main.h)(0x66951D79)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6693B083)
@@ -961,6 +965,43 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x6693B083)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x6693B083)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6693B083)
 I (../Core/Inc/gpio.h)(0x663B453C)
+F (..\User\JiXieBi\JiXieBi.c)(0x6697DD3F)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\jixiebi.o --omf_browse sleepno1\jixiebi.crf --depend sleepno1\jixiebi.d)
+I (..\User\JiXieBi\JiXieBi.h)(0x6697CE4B)
+I (../Core/Inc/main.h)(0x66951D79)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6693B083)
+I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6693A92A)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x6693B083)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x6693B07F)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x6693B07F)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x6693B083)
+I (D:\rmSoftware\ARM\ARMCC\include\stdint.h)(0x599EDB3E)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x6693B083)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x6693B083)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x6693B083)
+I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x6693B083)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x6693B07F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x6693B083)
+I (D:\rmSoftware\ARM\ARMCC\include\stddef.h)(0x599EDB3C)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x6693B083)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6693B083)
+I (..\User\JiXieBi\air_pump.h)(0x6693B610)
+I (../Core/Inc/gpio.h)(0x663B453C)
+I (..\User\JiXieBi\my_servo.h)(0x668E9512)
+I (../Core/Inc/usart.h)(0x668E96F0)
 F (..\User\Chassis\Chassis.cpp)(0x6697AB62)(--cpp -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\chassis.o --omf_browse sleepno1\chassis.crf --depend sleepno1\chassis.d)
 I (..\User\Chassis\Chassis.hpp)(0x669777F9)
 I (../Core/Inc/main.h)(0x66951D79)
@@ -1103,8 +1144,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x6693B083)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x6693B083)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6693B083)
 I (../Core/Inc/tim.h)(0x669627B6)
-F (..\User\Task\Task.c)(0x66978BCB)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\task.o --omf_browse sleepno1\task.crf --depend sleepno1\task.d)
-I (..\User\Task\Task.h)(0x66971D7D)
+F (..\User\Task\Task.c)(0x6697CB9C)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../User/Shoot -I ../User/JiXieBi -I ../User/Chassis -I ../User/Camera -I ../User/Task --cpp11-I.\RTE\_SleepNO1-ID:\rmSoftware\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-ID:\rmSoftware\ARM\PACK\Keil\STM32F4xx_DFP\2.8.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o sleepno1\task.o --omf_browse sleepno1\task.crf --depend sleepno1\task.d)
+I (..\User\Task\Task.h)(0x6697CB36)
 I (../Core/Inc/main.h)(0x66951D79)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6693B083)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6693A92A)
@@ -1142,3 +1183,7 @@ I (../Core/Inc/gpio.h)(0x663B453C)
 I (../Core/Inc/tim.h)(0x669627B6)
 I (../User/Shoot/MSDriver.h)(0x66962A49)
 I (../User/Shoot/fix_pos_dj.h)(0x668964D3)
+I (../User/JiXieBi/JiXieBi.h)(0x6697CE4B)
+I (../User/JiXieBi/air_pump.h)(0x6693B610)
+I (../User/JiXieBi/my_servo.h)(0x668E9512)
+I (../Core/Inc/usart.h)(0x668E96F0)

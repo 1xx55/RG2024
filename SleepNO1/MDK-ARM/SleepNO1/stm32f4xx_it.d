@@ -44,3 +44,6 @@ sleepno1\stm32f4xx_it.o: ../Core/Inc/gpio.h
 sleepno1\stm32f4xx_it.o: ../Core/Inc/tim.h
 sleepno1\stm32f4xx_it.o: ../User/Shoot/MSDriver.h
 sleepno1\stm32f4xx_it.o: ../User/Shoot/fix_pos_dj.h
+sleepno1\stm32f4xx_it.o: ../User/JiXieBi/JiXieBi.h
+sleepno1\stm32f4xx_it.o: ../User/JiXieBi/air_pump.h
+sleepno1\stm32f4xx_it.o: ../User/JiXieBi/my_servo.h

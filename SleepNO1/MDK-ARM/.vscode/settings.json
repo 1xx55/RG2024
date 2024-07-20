@@ -71,6 +71,7 @@
   "files.associations": {
     "msdriver.h": "c",
     "my_servo.h": "c",
-    "shoot.h": "c"
+    "shoot.h": "c",
+    "jixiebi.h": "c"
   }
 }

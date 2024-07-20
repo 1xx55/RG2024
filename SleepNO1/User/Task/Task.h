@@ -4,6 +4,7 @@
 // includes
 #include "main.h"
 #include "Shoot.h"
+#include "JiXieBi.h"
 // macros
 
 // function declarations

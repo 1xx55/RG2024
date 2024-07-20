@@ -40,4 +40,5 @@ void SERVOCMD_MOVE_TIME_WRITE(uint8_t servo_id,uint16_t arg_para,uint16_t time_p
 
     //´«ËÍ
     HAL_UART_Transmit(&huart2, buf, buf[3]+3, HAL_MAX_DELAY);
+    //HAL_UART_Transmit_IT(&huart2, buf, buf[3]+3);
 }

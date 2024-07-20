@@ -29,6 +29,7 @@
 "sleepno1\shoot.o"
 "sleepno1\my_servo.o"
 "sleepno1\air_pump.o"
+"sleepno1\jixiebi.o"
 "sleepno1\chassis.o"
 "sleepno1\motor.o"
 "sleepno1\pid.o"
