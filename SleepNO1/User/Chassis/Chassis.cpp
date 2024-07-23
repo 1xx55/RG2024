@@ -86,11 +86,11 @@ void Class_Chassis::Init(TIM_HandleTypeDef __Driver_PWM_TIM, TIM_HandleTypeDef _
         Motor[i].Omega_PID.Init(0, 0, 0, (float)ULONG_MAX, (float)ULONG_MAX);
         
     }
-    for(int i = 2; i < 4; i++)
-    {
-        Motor[i].Omega_PID.Init(1000, 0, 0, (float)ULONG_MAX, (float)ULONG_MAX);
+    // for(int i = 2; i < 4; i++)
+    // {
+    //     Motor[i].Omega_PID.Init(300, 500, 40, (float)ULONG_MAX, (float)ULONG_MAX);
         
-    }
+    // }
 
     //遥控器初始化
 //    DR16.Init(CHASSIS_DR16_CONTROL_UART);

@@ -1,7 +1,7 @@
 #include "air_pump.h"
 
 //Author: 1xx55
-//ÎÄ¼þËµÃ÷£ºÆø±Ã¡£
+//ï¿½Ä¼ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¡ï¿½
 
 void AIR_PUMP_Init(){
     HAL_GPIO_WritePin(B_ENA1_GPIO_Port,B_ENA1_Pin,GPIO_PIN_RESET);
@@ -12,6 +12,8 @@ void AIR_PUMP_Init(){
 
     HAL_GPIO_WritePin(B_INB1_GPIO_Port,B_INB1_Pin,GPIO_PIN_RESET);
     HAL_GPIO_WritePin(B_INB2_GPIO_Port,B_INB2_Pin,GPIO_PIN_RESET);
+
+    AIR_PUMP_CLOSE();
 }
 
 void AIR_PUMP_OPEN(){
