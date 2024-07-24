@@ -112,7 +112,7 @@ int main(void)
   HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
   //底盘初始
   Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
-  Chassis.Set_Control_Method(Control_Method_OMEGA);     //Control_Method_OMEGA   OPENLOOP
+  Chassis.Set_Control_Method(Control_Method_OPENLOOP);     //Control_Method_OMEGA   OPENLOOP
   //�?:
   //使能计算时钟
   HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);

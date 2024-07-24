@@ -14,4 +14,6 @@ void JiXieBi_TIM_IT();
 void JiXieBi_TASK_Schedule();
 void JiXieBi_Init();
 
+void JiXieBi_READY();
+void JiXieBi_JIAQU();
 #endif

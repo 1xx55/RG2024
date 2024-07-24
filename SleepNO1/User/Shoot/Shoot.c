@@ -7,24 +7,21 @@ int8_t taskid = -1;
 int speed_para = 750;
 
 void SHOOT_TIM_IT(){
-    if(time_counter > 1000) return; //
+    if(taskid == -1) return; //
     //更新计数变量
     time_counter++;
 }
 
 void SHOOT_TASK_Schedule(){
     //put in main while 1
-    //mission 1
+    //mission 1: shoot start
     if      ( time_counter >= 0 && taskid == 0)    {FIX_POS_DJ_CLOSE();taskid++;}
     else if ( time_counter >= 20 && taskid == 1)   {MS_GO_UP();taskid++;}
     else if ( time_counter >= 220 && taskid == 2)  {MOCALUN_start(speed_para);taskid++;}
     else if ( time_counter >= 470 && taskid == 3)  {MOCALUN_stop();taskid++;}
     else if ( time_counter >= 520 && taskid == 4)  {MS_GO_DOWN();taskid++;}
-    else if ( time_counter >= 520 && taskid == 5)  {FIX_POS_DJ_OPEN();taskid++;}
-
-    if      ( time_counter >= 0 && taskid == 7){
-        
-    }
+    else if ( time_counter >= 520 && taskid == 5)  {FIX_POS_DJ_OPEN();taskid=-1;}
+    //mission 1 end
 
 }
 

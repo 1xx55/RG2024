@@ -12,16 +12,59 @@ void JiXieBi_TIM_IT(){
 }
 
 void JiXieBi_TASK_Schedule(){
-    // Task1: 初始化
-    // if      ( time_counter >= 0 && taskid == 0)    {FIX_POS_DJ_CLOSE();taskid++;}
-    // else if ( time_counter >= 20 && taskid == 1)   {MS_GO_UP();taskid++;}
-    // else if ( time_counter >= 220 && taskid == 2)  {MOCALUN_start(speed_para);taskid++;}
-    // else if ( time_counter >= 470 && taskid == 3)  {MOCALUN_stop();taskid++;}
-    // else if ( time_counter >= 520 && taskid == 4)  {MS_GO_DOWN();taskid++;}
-    // else if ( time_counter >= 520 && taskid == 5)  {FIX_POS_DJ_OPEN();taskid++;}
+    // Task1: 夹取
+    if ( jixiebi_time_counter >= 1 && jixiebi_taskid == 0){
+        AIR_PUMP_OPEN(); 
+        jixiebi_taskid++;  
+    } 
+    else if ( jixiebi_time_counter >= 2 && jixiebi_taskid == 1){
+        SERVOCMD_MOVE_TIME_WRITE(1,570,800);
+        SERVOCMD_MOVE_TIME_WRITE(2,240,800);
+        SERVOCMD_MOVE_TIME_WRITE(3,1000,800);
+        SERVOCMD_MOVE_TIME_WRITE(4,880,800); //catch 1
+        jixiebi_taskid++;  
+    } 
+    else if ( jixiebi_time_counter >= 87 && jixiebi_taskid == 2){
+        SERVOCMD_MOVE_TIME_WRITE(1,635,500); //catch 2 ,停留久一点给视觉看 ,1s
+        jixiebi_taskid++;  
+    } 
+    else if ( jixiebi_time_counter >= 187 && jixiebi_taskid == 3){
+        SERVOCMD_MOVE_TIME_WRITE(1,570,200); //迅速catch 1
+        
+        SERVOCMD_MOVE_TIME_WRITE(3,150,1800); //3号舵机直接拔起
+        jixiebi_taskid++; 
+    }
+    else if ( jixiebi_time_counter >= 237 && jixiebi_taskid == 4){
+        SERVOCMD_MOVE_TIME_WRITE(1,700,700);
+        SERVOCMD_MOVE_TIME_WRITE(2,160,700); //1,2号舵机调整好弧度
+        jixiebi_taskid++; 
+    }
+    else if ( jixiebi_time_counter >= 390 && jixiebi_taskid == 5){
+        SERVOCMD_MOVE_TIME_WRITE(1,650,700);
+        SERVOCMD_MOVE_TIME_WRITE(2,570,700); //2号1号向上 往前送
+        SERVOCMD_MOVE_TIME_WRITE(3,205,700); //3号稍微上抬一点
+        jixiebi_taskid++; 
+    }
+    else if ( jixiebi_time_counter >= 465 && jixiebi_taskid == 6){
+        AIR_PUMP_CLOSE(); //关泵
+        jixiebi_taskid++;
+    }
+    else if ( jixiebi_time_counter >= 480 && jixiebi_taskid == 7){
+        JiXieBi_READY(); //机械臂复位
+        jixiebi_taskid = -1;
+    }
+    // Task 1 end.
 }
 
-void JiXieBi_Ready(){ //从0开始计数 开始执行任务 time_counter = 1000代表任务结束
+void JiXieBi_READY(){ 
+    //2s
+    SERVOCMD_MOVE_TIME_WRITE(1,570,2000);
+    SERVOCMD_MOVE_TIME_WRITE(2,240,2000);
+    SERVOCMD_MOVE_TIME_WRITE(3,1000,2000);
+    SERVOCMD_MOVE_TIME_WRITE(4,880,2000); //catch 1
+}
+
+void JiXieBi_JIAQU(){ //从0开始计数 开始执行任务 time_counter = 10代表任务结束
     jixiebi_time_counter = 0;
     jixiebi_taskid = 0;
 }
@@ -29,6 +72,7 @@ void JiXieBi_Ready(){ //从0开始计数 开始执行任务 time_counter = 1000�
 void JiXieBi_Init(){
     //机械臂初始化
     AIR_PUMP_Init();
+    JiXieBi_READY();
 }
 
 //机械臂的舵机回到初始姿态,5s
