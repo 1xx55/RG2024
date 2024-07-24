@@ -23,7 +23,7 @@ Team Sleep No.1  electro codes for Robogame 2024.
 ③SleepNO1队曾经某天烧写不了程序，检查了接线发现没问题，按了114次reset拔插了514次ST-link之后可以烧写了。
 
 ④SleepNO1队曾经某天能烧写程序但是bug一直改不好，build了191次工程，按了981次reset，Load了0次。
-# #经验总结
+# 经验总结
 1.在和机械臂的uart通信中，单片机5v请使用电源降压得到。笔记本提供的5v不行，要共阳极
 
 2.所有单元共地
