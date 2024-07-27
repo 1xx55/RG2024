@@ -106,46 +106,45 @@ int main(void)
   SHOOT_Init();
 	CAMERA_POS_DJ_Init();
   JiXieBi_Init();
-  //MS_GO_UP();
 
 //---------------------------------底盘调试代码------------------------------------------------------
   HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
   //底盘初始
   Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
-  Chassis.Set_Control_Method(Control_Method_OPENLOOP);     //Control_Method_OMEGA   OPENLOOP
-  //�?:
+  Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
+  //�?????:
   //使能计算时钟
   HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
 
 
-  SpeedTypeDef v_front=
-  {
-    0, 0.4, 0,  0,0,0,0
-  };
-  SpeedTypeDef v_back=
-  {
-    0, -0.4, 0,  0,0,0,0
-  };
-  SpeedTypeDef v_right=
-  {
-    0.4, 0, 0,   0,0,0,0
-  };  
-  SpeedTypeDef v_left=
-  {
-    -0.4, 0, 0,   0,0,0,0
-  }; 
-  SpeedTypeDef v_rotate=
-  {
-    0, 0, 1.0,    0,0,0,0
-  };
-  SpeedTypeDef v_crotate=
-  {
-    0, 0, -1.0,    0,0,0,0
-  };
-  SpeedTypeDef v_stop=
-  {
-    0, 0, 0,    0,0,0,0
-  };
+  // SpeedTypeDef v_front=
+  // {
+  //   0, 0.8, 0,  0,0,0,0
+  // };
+  // SpeedTypeDef v_back=
+  // {
+  //   0, -0.8, 0,  0,0,0,0
+  // };
+  // SpeedTypeDef v_right=
+  // {
+  //   0.8, 0, 0,   0,0,0,0
+  // };  
+  // SpeedTypeDef v_left=
+  // {
+  //   -0.8, 0, 0,   0,0,0,0
+  // }; 
+  // SpeedTypeDef v_rotate=
+  // {
+  //   0, 0, 1.5,    0,0,0,0
+  // };
+  // SpeedTypeDef v_crotate=
+  // {
+  //   0, 0, -1.5 ,    0,0,0,0
+  // };
+  // SpeedTypeDef v_stop=
+  // {
+  //   0, 0, 0,    0,0,0,0
+  // };
   
   
   /* USER CODE END 2 */
@@ -155,8 +154,9 @@ int main(void)
   while (1)
   {
     Task_Schedule();
-    //if(cnt == 1000000) SHOOT_START();
-    //cnt++;
+    if(cnt == 5000000)  JiXieBi_JIAQU();
+    cnt++;
+    
     //if(cnt%100000==0)
     // SERVOCMD_MOVE_TIME_WRITE(4,800,1000);
     // HAL_Delay(1000);
@@ -165,23 +165,28 @@ int main(void)
     // MOCALUN_stop();
     // HAL_Delay(2000);
     //---------------------------------底盘调试代码------------------------------------------------------
-   Chassis.Set_Velocity(v_stop);
-   HAL_Delay(2000); 
-   Chassis.Set_Velocity(v_back);
-   HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000); 
-	 Chassis.Set_Velocity(v_front);
-   HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-   Chassis.Set_Velocity(v_right);
-   HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-   Chassis.Set_Velocity(v_rotate);
-   HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-   Chassis.Set_Velocity(v_crotate);
-   HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-   Chassis.Set_Velocity(v_left);
-   HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-   Chassis.Set_Velocity(v_back);
-   HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-  // ---------------------------------机械臂调试代�????????????????????-----------------------------------------------------
+  // Chassis.Motor[0].Set_Angle_Target(10*PI);
+  // Chassis.Motor[1].Set_Angle_Target(10*PI);
+  // Chassis.Motor[2].Set_Angle_Target(10*PI);
+  // Chassis.Motor[3].Set_Angle_Target(10*PI);
+
+  //  Chassis.Set_Velocity(v_stop);
+  //  HAL_Delay(2000); 
+  //  Chassis.Set_Velocity(v_back);
+  //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000); 
+	//  Chassis.Set_Velocity(v_front);
+  //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
+  //  Chassis.Set_Velocity(v_right);
+  //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
+  //  Chassis.Set_Velocity(v_rotate);
+  //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
+  //  Chassis.Set_Velocity(v_crotate);
+  //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
+  //  Chassis.Set_Velocity(v_left);
+  //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
+  //  Chassis.Set_Velocity(v_back);
+  //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
+  // ---------------------------------机械臂调试代�????????????????????????-----------------------------------------------------
 //  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
 //  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
 //  HAL_Delay(2000);

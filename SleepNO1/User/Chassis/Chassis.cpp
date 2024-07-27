@@ -83,12 +83,13 @@ void Class_Chassis::Init(TIM_HandleTypeDef __Driver_PWM_TIM, TIM_HandleTypeDef _
     
     for(int i = 0; i < 4; i++)
     {
-        Motor[i].Omega_PID.Init(0, 0, 0, (float)ULONG_MAX, (float)ULONG_MAX);
-        
+        Motor[i].Omega_PID.Init(800.0, 100.0, 0, (float)ULONG_MAX, (float)ULONG_MAX); 
+        Motor[i].Angle_PID.Init(20.0, 0.0, 10.0,(float)ULONG_MAX, 15.0);
+
     }
     // for(int i = 2; i < 4; i++)
     // {
-    //     Motor[i].Omega_PID.Init(300, 500, 40, (float)ULONG_MAX, (float)ULONG_MAX);
+    //     Motor[i].Omega_PID.Init(1000.0, 0, 0, (float)ULONG_MAX, (float)ULONG_MAX);
         
     // }
 

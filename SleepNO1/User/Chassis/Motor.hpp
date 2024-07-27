@@ -33,7 +33,7 @@ const float MOTOR_ENCODER_NUM_PER_RAD = (13.0f *27.0f / 2.0f / PI);     //  编�
 const int32_t MOTOR_CALCULATE_PRESCALER = 32767;
 
 //计算定时器频率, s
-const float MOTOR_CALCULATE_PERIOD = 0.01f;  
+const float MOTOR_CALCULATE_PERIOD = 0.005f;  
 
 
 /* Exported types ------------------------------------------------------------*/

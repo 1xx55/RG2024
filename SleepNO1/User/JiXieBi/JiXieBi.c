@@ -30,8 +30,7 @@ void JiXieBi_TASK_Schedule(){
     } 
     else if ( jixiebi_time_counter >= 187 && jixiebi_taskid == 3){
         SERVOCMD_MOVE_TIME_WRITE(1,570,200); //迅速catch 1
-        
-        SERVOCMD_MOVE_TIME_WRITE(3,150,1800); //3号舵机直接拔起
+        SERVOCMD_MOVE_TIME_WRITE(3,150,1600); //3号舵机直接拔起
         jixiebi_taskid++; 
     }
     else if ( jixiebi_time_counter >= 237 && jixiebi_taskid == 4){
@@ -39,17 +38,21 @@ void JiXieBi_TASK_Schedule(){
         SERVOCMD_MOVE_TIME_WRITE(2,160,700); //1,2号舵机调整好弧度
         jixiebi_taskid++; 
     }
-    else if ( jixiebi_time_counter >= 390 && jixiebi_taskid == 5){
+    else if ( jixiebi_time_counter >= 350 && jixiebi_taskid == 5){
         SERVOCMD_MOVE_TIME_WRITE(1,650,700);
-        SERVOCMD_MOVE_TIME_WRITE(2,570,700); //2号1号向上 往前送
-        SERVOCMD_MOVE_TIME_WRITE(3,205,700); //3号稍微上抬一点
+        SERVOCMD_MOVE_TIME_WRITE(2,670,1000); //2号1号向上 往前送
+        SERVOCMD_MOVE_TIME_WRITE(3,205,300); //3号稍微上抬一点
         jixiebi_taskid++; 
     }
-    else if ( jixiebi_time_counter >= 465 && jixiebi_taskid == 6){
+    else if ( jixiebi_time_counter >= 460 && jixiebi_taskid == 6){
+        SERVOCMD_MOVE_TIME_WRITE(3,305,200); //3号稍微上抬一点
+        jixiebi_taskid++;
+    }
+    else if ( jixiebi_time_counter >= 505 && jixiebi_taskid == 7){
         AIR_PUMP_CLOSE(); //关泵
         jixiebi_taskid++;
     }
-    else if ( jixiebi_time_counter >= 480 && jixiebi_taskid == 7){
+    else if ( jixiebi_time_counter >= 565 && jixiebi_taskid == 8){
         JiXieBi_READY(); //机械臂复位
         jixiebi_taskid = -1;
     }
@@ -71,7 +74,9 @@ void JiXieBi_JIAQU(){ //从0开始计数 开始执行任务 time_counter = 10代
 
 void JiXieBi_Init(){
     //机械臂初始化
+    HAL_UART_Init(&huart2);
     AIR_PUMP_Init();
+    HAL_Delay(10);
     JiXieBi_READY();
 }
 
