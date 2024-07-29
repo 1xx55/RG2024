@@ -118,9 +118,9 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PGPin PGPin PGPin PGPin
-                           PGPin PGPin */
+                           PGPin PGPin PGPin */
   GPIO_InitStruct.Pin = MSDriver_ENA_L_Pin|B_INA1_Pin|B_INA2_Pin|B_INB1_Pin
-                          |B_INB2_Pin|Pin_PushDJQD3V3_3_Pin;
+                          |B_INB2_Pin|Pin_PushDJQD3V3_4_Pin|Pin_PushDJQD3V3_3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -145,13 +145,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = Pin_PushDJQD3V3_4_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(Pin_PushDJQD3V3_4_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = Pin_PullDown_HallEncoderB4_Pin;

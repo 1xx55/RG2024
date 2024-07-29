@@ -112,7 +112,7 @@ int main(void)
   //底盘初始
   Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
   Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
-  //�?????:
+  //�??????:
   //使能计算时钟
   HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
 
@@ -165,6 +165,11 @@ int main(void)
     // MOCALUN_stop();
     // HAL_Delay(2000);
     //---------------------------------底盘调试代码------------------------------------------------------
+  Chassis.Set_add_rad(4*PI,0);
+  if(cnt == 10000000) Chassis.Set_add_rad(-4*PI,0); 
+  if(cnt == 20000000) Chassis.Set_add_rad(0,4*PI); 
+  if(cnt == 30000000) Chassis.Set_add_rad(0,-4*PI); 
+
   // Chassis.Motor[0].Set_Angle_Target(10*PI);
   // Chassis.Motor[1].Set_Angle_Target(10*PI);
   // Chassis.Motor[2].Set_Angle_Target(10*PI);
@@ -186,7 +191,7 @@ int main(void)
   //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
   //  Chassis.Set_Velocity(v_back);
   //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-  // ---------------------------------机械臂调试代�????????????????????????-----------------------------------------------------
+  // ---------------------------------机械臂调试代�?????????????????????????-----------------------------------------------------
 //  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
 //  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
 //  HAL_Delay(2000);

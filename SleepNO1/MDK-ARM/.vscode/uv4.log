@@ -1,24 +1,11 @@
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\rmSoftware\ARM\ARMCC\Bin'
 Build target 'SleepNO1'
-compiling JiXieBi.c...
-..\User\JiXieBi\JiXieBi.c(131): warning:  #1-D: last line of file ends without a newline
-      // HAL_Delay(888);
-..\User\JiXieBi\JiXieBi.c: 1 warning, 0 errors
-compiling Task.c...
-..\User\Task\Task.c(22): warning:  #1-D: last line of file ends without a newline
-  }
-..\User\Task\Task.c: 1 warning, 0 errors
-compiling air_pump.c...
-..\User\JiXieBi\air_pump.c(39): warning:  #1-D: last line of file ends without a newline
-  }
-..\User\JiXieBi\air_pump.c: 1 warning, 0 errors
 compiling main.c...
-../Core/Src/main.c(189): warning:  #2532-D: support for trigraphs is disabled
-    // ---------------------------------机械臂调试代�?????????????????????????-----------------------------------------------------
+../Core/Src/main.c(194): warning:  #2532-D: support for trigraphs is disabled
+    // ---------------------------------机械臂调试代�??????????????????????????-----------------------------------------------------
 ../Core/Src/main.c: 1 warning, 0 errors
-compiling stm32f4xx_it.c...
 linking...
-Program Size: Code=20920 RO-data=468 RW-data=84 ZI-data=3972  
+Program Size: Code=21188 RO-data=468 RW-data=84 ZI-data=3972  
 FromELF: creating hex file...
-"SleepNO1\SleepNO1.axf" - 0 Error(s), 4 Warning(s).
+"SleepNO1\SleepNO1.axf" - 0 Error(s), 1 Warning(s).
 Build Time Elapsed:  00:00:02
