@@ -174,8 +174,8 @@ void Class_Chassis::Calculate_TIM_PeriodElapsedCallback()
     
 }
 
-void Class_Chassis::Set_add_rad(float ahead, float left){
-    //设置向前移动转多少圈, 向左移动转多少圈.  参数为负数则为反方向.
+void Class_Chassis::Set_add_rad(float ahead, float left ,float rotate){
+    //设置向前移动转多少圈, 向左移动转多少圈,以及旋转。 参数为负数则为反方向.
     //读取当前角度目标值
     float calc_target[4];
     for(int i=0;i<4;i++){
@@ -191,6 +191,11 @@ void Class_Chassis::Set_add_rad(float ahead, float left){
     calc_target[1] -= left;
     calc_target[2] += left; 
     calc_target[3] -= left; 
+    //旋转 2,3号轮子参数多一个负号
+    calc_target[0] += rotate; 
+    calc_target[1] -= rotate;
+    calc_target[2] -= rotate; 
+    calc_target[3] += rotate;
     //写入计算得到的目标值
     for(int i=0;i<4;i++){
         Motor[i].Set_Angle_Target(calc_target[i]);

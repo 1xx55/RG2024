@@ -166,10 +166,10 @@ int main(void)
     // MOCALUN_stop();
     // HAL_Delay(2000);
     //---------------------------------底盘调试代码------------------------------------------------------
-  Chassis.Set_add_rad(4*PI,0);
-  if(cnt == 10000000) Chassis.Set_add_rad(-4*PI,0); 
-  if(cnt == 20000000) Chassis.Set_add_rad(0,4*PI); 
-  if(cnt == 30000000) Chassis.Set_add_rad(0,-4*PI); 
+  Chassis.Set_add_rad(4*PI,0,0);
+  if(cnt == 10000000) Chassis.Set_add_rad(-4*PI,0,0); 
+  if(cnt == 20000000) Chassis.Set_add_rad(0,4*PI,0); 
+  if(cnt == 30000000) Chassis.Set_add_rad(0,-4*PI,0); 
 
   // Chassis.Motor[0].Set_Angle_Target(10*PI);
   // Chassis.Motor[1].Set_Angle_Target(10*PI);
