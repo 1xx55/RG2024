@@ -38,9 +38,9 @@ sleepno1\task.o: ../Core/Inc/gpio.h
 sleepno1\task.o: ../Core/Inc/tim.h
 sleepno1\task.o: ../User/Shoot/MSDriver.h
 sleepno1\task.o: ../User/Shoot/fix_pos_dj.h
+sleepno1\task.o: ../User/JiXieBi/com_to_raspi.h
+sleepno1\task.o: ../Core/Inc/usart.h
 sleepno1\task.o: ../User/JiXieBi/JiXieBi.h
 sleepno1\task.o: ../User/JiXieBi/air_pump.h
 sleepno1\task.o: ../User/JiXieBi/my_servo.h
-sleepno1\task.o: ../Core/Inc/usart.h
 sleepno1\task.o: ../User/JiXieBi/com_to_raspi.h
-sleepno1\task.o: ../User/JiXieBi/JiXieBi.h

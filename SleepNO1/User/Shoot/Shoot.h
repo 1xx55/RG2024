@@ -6,6 +6,8 @@
 #include "MoCaLun.h"
 #include "MSDriver.h"
 #include "fix_pos_dj.h"
+#include "com_to_raspi.h"
+
 
 // macros
 // shoot tim:10ms

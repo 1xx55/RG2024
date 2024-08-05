@@ -2,6 +2,7 @@
 
 //using huart3
 uint8_t receive_raspy_buffer[16];
+uint8_t send_raspy_buffer[16];
 int receive_raspy_pointer = 0;
 
 void com_raspi_Init(){
@@ -34,7 +35,16 @@ void handle_received_data(){
         //TODO:set para
         int8_t para = receive_raspy_buffer[2] * 256 + receive_raspy_buffer[3];
         JiXieBi_set_fourth_dj(para);
-        //返回收到的数据
-        HAL_UART_Transmit(&RASPI_USINGUART,receive_raspy_buffer+2,2,HAL_MAX_DELAY);
+        //如果需要测试，可以用下面这条返回收到的数据
+        //HAL_UART_Transmit(&RASPI_USINGUART,receive_raspy_buffer+2,2,HAL_MAX_DELAY);
     }
+}
+
+void send_message_to_raspi(uint8_t message){
+    //帧头
+    send_raspy_buffer[0] = 0x66;
+    send_raspy_buffer[1] = 0x66;
+    //消息
+    send_raspy_buffer[2] = message;
+    HAL_UART_Transmit(&RASPI_USINGUART,send_raspy_buffer,3,HAL_MAX_DELAY);
 }

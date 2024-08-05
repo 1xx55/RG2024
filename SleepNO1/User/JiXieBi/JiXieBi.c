@@ -4,7 +4,7 @@
 //定时器完成
 uint16_t jixiebi_time_counter = 10000;
 int8_t jixiebi_taskid = -1;
-int8_t four_dj_para = 880;
+int16_t four_dj_para = 880;
 
 void JiXieBi_TIM_IT(){
     if(jixiebi_taskid == -1) return; 
@@ -27,6 +27,7 @@ void JiXieBi_TASK_Schedule(){
     } 
     else if ( jixiebi_time_counter >= 87 && jixiebi_taskid == 2){
         SERVOCMD_MOVE_TIME_WRITE(1,635,500); //catch 2 ,停留久一点给视觉看 ,1s
+        send_message_to_raspi(CATCH_START);
         jixiebi_taskid++;  
     } 
     else if ( jixiebi_time_counter >= 187 && jixiebi_taskid == 3){
@@ -73,7 +74,7 @@ void JiXieBi_JIAQU(){ //从0开始计数 开始执行任务 time_counter = 10代
     jixiebi_taskid = 0;
 }
 
-void JiXieBi_set_fourth_dj(int8_t para){
+void JiXieBi_set_fourth_dj(int16_t para){
     four_dj_para = para;
 }
 

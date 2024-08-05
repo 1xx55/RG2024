@@ -17,5 +17,5 @@ void JiXieBi_Init();
 
 void JiXieBi_READY();
 void JiXieBi_JIAQU();
-void JiXieBi_set_fourth_dj(int8_t para);
+void JiXieBi_set_fourth_dj(int16_t para);
 #endif

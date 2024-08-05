@@ -1,14 +1,14 @@
 #include "Shoot.h"
 
 //author 1xx55
-//·¢ÉäÃüÁî.ÓÃÒ»¸ö¶¨Ê±Æ÷Íê³É
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
 uint16_t time_counter = 1000;
 int8_t taskid = -1;
 int speed_para = 750;
 
 void SHOOT_TIM_IT(){
     if(taskid == -1) return; //
-    //¸üÐÂ¼ÆÊý±äÁ¿
+    //ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     time_counter++;
 }
 
@@ -18,14 +18,18 @@ void SHOOT_TASK_Schedule(){
     if      ( time_counter >= 0 && taskid == 0)    {FIX_POS_DJ_CLOSE();taskid++;}
     else if ( time_counter >= 20 && taskid == 1)   {MS_GO_UP();taskid++;}
     else if ( time_counter >= 220 && taskid == 2)  {MOCALUN_start(speed_para);taskid++;}
-    else if ( time_counter >= 470 && taskid == 3)  {MOCALUN_stop();taskid++;}
+    else if ( time_counter >= 470 && taskid == 3)  {
+        MOCALUN_stop();
+        send_message_to_raspi(SHOOT_END);
+        taskid++;
+        }
     else if ( time_counter >= 520 && taskid == 4)  {MS_GO_DOWN();taskid++;}
     else if ( time_counter >= 520 && taskid == 5)  {FIX_POS_DJ_OPEN();taskid=-1;}
     //mission 1 end
 
 }
 
-void SHOOT_START(){ //´Ó0¿ªÊ¼¼ÆÊý ¿ªÊ¼Ö´ÐÐÈÎÎñ time_counter = 1000´ú±íÈÎÎñ½áÊø
+void SHOOT_START(){ //ï¿½ï¿½0ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ê¼Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ time_counter = 1000ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     time_counter = 0;
     taskid = 0;
 }
@@ -35,21 +39,21 @@ void __SHOOT_123(){
     taskid = 7;
 }
 
-void SHOOT_ABRUPT(){ //ÒâÍâÖÕÖ¹,Í£Ö¹ËùÓÐÄ£¿é¡£
-    time_counter = 1000; //ÈÎÎñÍ£Ö¹
+void SHOOT_ABRUPT(){ //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹,Í£Ö¹ï¿½ï¿½ï¿½ï¿½Ä£ï¿½é¡£
+    time_counter = 1000; //ï¿½ï¿½ï¿½ï¿½Í£Ö¹
     taskid = -1;
-    MOCALUN_stop();      //Ä¦²ÁÂÖÍ£Ö¹
-    FIX_POS_DJ_OPEN();   //ÕÅ¿ª¼Ð×Ó
-    MS_GO_DOWN();        //Ë¿¸ËÏòÏÂÔË¶¯µ½µ×²¿
+    MOCALUN_stop();      //Ä¦ï¿½ï¿½ï¿½ï¿½Í£Ö¹
+    FIX_POS_DJ_OPEN();   //ï¿½Å¿ï¿½ï¿½ï¿½ï¿½ï¿½
+    MS_GO_DOWN();        //Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½×²ï¿½
 }
 
 void SHOOT_set_speed(int speed){
-    // speed para: 600ÎÞÁ¦·É²»³öÈ¥ 700¾¢ 750ÓÐµãÔ¶
+    // speed para: 600ï¿½ï¿½ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½È¥ 700ï¿½ï¿½ 750ï¿½Ðµï¿½Ô¶
     speed_para = speed;
 }
 
 void SHOOT_Init(){
-    //·¢Éä»ú¹¹³õÊ¼»¯
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
     MS_Init();
     FIX_POS_DJ_Init();
     MOCALUN_Init();
