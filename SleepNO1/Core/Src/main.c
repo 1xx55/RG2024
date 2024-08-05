@@ -101,6 +101,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM11_Init();
   MX_TIM8_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
   Task_TIM_Init(); //first!
   SHOOT_Init();
@@ -112,7 +113,7 @@ int main(void)
   //底盘初始
   Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
   Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
-  //�??????:
+  //�???????:
   //使能计算时钟
   HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
 
@@ -191,7 +192,7 @@ int main(void)
   //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
   //  Chassis.Set_Velocity(v_back);
   //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-  // ---------------------------------机械臂调试代�?????????????????????????-----------------------------------------------------
+  // ---------------------------------机械臂调试代�??????????????????????????-----------------------------------------------------
 //  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
 //  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
 //  HAL_Delay(2000);

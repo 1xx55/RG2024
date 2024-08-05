@@ -25,6 +25,7 @@
 
 #include "Chassis.hpp"
 #include "Task.h"
+#include "com_to_raspi.h"
 
 /* USER CODE END Includes */
 
@@ -369,4 +370,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
 }
 
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+  if(huart == &RASPI_USINGUART){
+    handle_received_data();
+  }
+}
 /* USER CODE END 1 */

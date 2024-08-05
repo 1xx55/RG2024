@@ -4,6 +4,7 @@
 //定时器完成
 uint16_t jixiebi_time_counter = 10000;
 int8_t jixiebi_taskid = -1;
+int8_t four_dj_para = 880;
 
 void JiXieBi_TIM_IT(){
     if(jixiebi_taskid == -1) return; 
@@ -21,7 +22,7 @@ void JiXieBi_TASK_Schedule(){
         SERVOCMD_MOVE_TIME_WRITE(1,570,800);
         SERVOCMD_MOVE_TIME_WRITE(2,240,800);
         SERVOCMD_MOVE_TIME_WRITE(3,1000,800);
-        SERVOCMD_MOVE_TIME_WRITE(4,880,800); //catch 1
+        SERVOCMD_MOVE_TIME_WRITE(4,four_dj_para,800); //catch 1
         jixiebi_taskid++;  
     } 
     else if ( jixiebi_time_counter >= 87 && jixiebi_taskid == 2){
@@ -72,10 +73,15 @@ void JiXieBi_JIAQU(){ //从0开始计数 开始执行任务 time_counter = 10代
     jixiebi_taskid = 0;
 }
 
+void JiXieBi_set_fourth_dj(int8_t para){
+    four_dj_para = para;
+}
+
 void JiXieBi_Init(){
     //机械臂初始化
-    HAL_UART_Init(&huart2);
+    //HAL_UART_Init(&huart2);
     AIR_PUMP_Init();
+    com_raspi_Init();
     HAL_Delay(10);
     JiXieBi_READY();
 }

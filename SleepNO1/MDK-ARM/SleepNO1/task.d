@@ -42,3 +42,5 @@ sleepno1\task.o: ../User/JiXieBi/JiXieBi.h
 sleepno1\task.o: ../User/JiXieBi/air_pump.h
 sleepno1\task.o: ../User/JiXieBi/my_servo.h
 sleepno1\task.o: ../Core/Inc/usart.h
+sleepno1\task.o: ../User/JiXieBi/com_to_raspi.h
+sleepno1\task.o: ../User/JiXieBi/JiXieBi.h
