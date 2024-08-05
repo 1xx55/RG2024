@@ -80,7 +80,7 @@ class Class_Chassis
         void Init(TIM_HandleTypeDef __Driver_PWM_TIM, TIM_HandleTypeDef __Calculate_EXTI_TIM);
         
         void Set_Velocity(SpeedTypeDef __Velocity);
-        void Set_add_rad(float ahead, float left); //my approach.
+        void Set_add_rad(float ahead, float left ,float rotate); //my approach.
         void Set_Control_Method(Enum_Control_Method __Control_Method);
         
         void Hall_Encoder_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
