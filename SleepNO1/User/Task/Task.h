@@ -5,6 +5,7 @@
 #include "main.h"
 #include "Shoot.h"
 #include "JiXieBi.h"
+#include "com_to_raspi.h"
 // macros
 
 // function declarations

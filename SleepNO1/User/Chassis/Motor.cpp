@@ -285,6 +285,17 @@ float Class_Motor_With_Hall_Encoder::Get_Angle_Now()
 }
 
 /**
+ * @brief 读取当前电机目标角度, rad
+ * 
+ * @return float 当前电机目标角度, rad
+ */
+
+float Class_Motor_With_Hall_Encoder::Get_Angle_Target()
+{
+    return(Angle_Target);
+}
+
+/**
  * @brief 霍尔编码器中断处理函数
  * 
  */

@@ -30,12 +30,12 @@
 "sleepno1\my_servo.o"
 "sleepno1\air_pump.o"
 "sleepno1\jixiebi.o"
-"sleepno1\com_to_raspi.o"
 "sleepno1\chassis.o"
 "sleepno1\motor.o"
 "sleepno1\pid.o"
 "sleepno1\camera_pos_dj.o"
 "sleepno1\task.o"
+"sleepno1\com_to_raspi.o"
 --strict --scatter "SleepNO1\SleepNO1.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

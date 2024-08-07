@@ -1,5 +1,5 @@
-sleepno1\com_to_raspi.o: ..\User\JiXieBi\com_to_raspi.c
-sleepno1\com_to_raspi.o: ..\User\JiXieBi\com_to_raspi.h
+sleepno1\com_to_raspi.o: ..\User\com_to_raspi.c
+sleepno1\com_to_raspi.o: ..\User\com_to_raspi.h
 sleepno1\com_to_raspi.o: ../Core/Inc/main.h
 sleepno1\com_to_raspi.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 sleepno1\com_to_raspi.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -33,8 +33,13 @@ sleepno1\com_to_raspi.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 sleepno1\com_to_raspi.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 sleepno1\com_to_raspi.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sleepno1\com_to_raspi.o: ../Core/Inc/usart.h
-sleepno1\com_to_raspi.o: ..\User\JiXieBi\JiXieBi.h
-sleepno1\com_to_raspi.o: ..\User\JiXieBi\air_pump.h
+sleepno1\com_to_raspi.o: ../User/JiXieBi/JiXieBi.h
+sleepno1\com_to_raspi.o: ../User/JiXieBi/air_pump.h
 sleepno1\com_to_raspi.o: ../Core/Inc/gpio.h
-sleepno1\com_to_raspi.o: ..\User\JiXieBi\my_servo.h
-sleepno1\com_to_raspi.o: ..\User\JiXieBi\com_to_raspi.h
+sleepno1\com_to_raspi.o: ../User/JiXieBi/my_servo.h
+sleepno1\com_to_raspi.o: ..\User\com_to_raspi.h
+sleepno1\com_to_raspi.o: ../User/Chassis/Chassis.hpp
+sleepno1\com_to_raspi.o: ../User/Chassis/Motor.hpp
+sleepno1\com_to_raspi.o: ../User/Chassis/PID.hpp
+sleepno1\com_to_raspi.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\limits.h
+sleepno1\com_to_raspi.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\math.h

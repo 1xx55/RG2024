@@ -38,14 +38,15 @@ sleepno1\main.o: ../User/Shoot/Shoot.h
 sleepno1\main.o: ../User/Shoot/MoCaLun.h
 sleepno1\main.o: ../User/Shoot/MSDriver.h
 sleepno1\main.o: ../User/Shoot/fix_pos_dj.h
-sleepno1\main.o: ../User/JiXieBi/com_to_raspi.h
+sleepno1\main.o: ..\User\com_to_raspi.h
 sleepno1\main.o: ../User/JiXieBi/JiXieBi.h
 sleepno1\main.o: ../User/JiXieBi/air_pump.h
 sleepno1\main.o: ../User/JiXieBi/my_servo.h
-sleepno1\main.o: ../User/JiXieBi/com_to_raspi.h
+sleepno1\main.o: ..\User\com_to_raspi.h
 sleepno1\main.o: ../User/Chassis/Chassis.hpp
 sleepno1\main.o: ../User/Chassis/Motor.hpp
 sleepno1\main.o: ../User/Chassis/PID.hpp
 sleepno1\main.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\limits.h
+sleepno1\main.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\math.h
 sleepno1\main.o: ../User/Camera/camera_pos_dj.h
 sleepno1\main.o: ../User/Task/Task.h

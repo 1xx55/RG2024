@@ -27,7 +27,7 @@ void JiXieBi_TASK_Schedule(){
     } 
     else if ( jixiebi_time_counter >= 87 && jixiebi_taskid == 2){
         SERVOCMD_MOVE_TIME_WRITE(1,635,500); //catch 2 ,停留久一点给视觉看 ,1s
-        send_message_to_raspi(CATCH_START);
+        send_message_to_raspi(TO_RASPI_CATCH_START);
         jixiebi_taskid++;  
     } 
     else if ( jixiebi_time_counter >= 187 && jixiebi_taskid == 3){

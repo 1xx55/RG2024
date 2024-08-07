@@ -15,14 +15,14 @@ void SHOOT_TIM_IT(){
 void SHOOT_TASK_Schedule(){
     //put in main while 1
     //mission 1: shoot start
-    if      ( time_counter >= 0 && taskid == 0)    {FIX_POS_DJ_CLOSE();taskid++;}
+    if      ( time_counter >  0 && taskid == 0)    {FIX_POS_DJ_CLOSE();taskid++;}
     else if ( time_counter >= 20 && taskid == 1)   {MS_GO_UP();taskid++;}
     else if ( time_counter >= 220 && taskid == 2)  {MOCALUN_start(speed_para);taskid++;}
     else if ( time_counter >= 470 && taskid == 3)  {
         MOCALUN_stop();
-        send_message_to_raspi(SHOOT_END);
+        send_message_to_raspi(TO_RASPI_SHOOT_END);
         taskid++;
-        }
+    }
     else if ( time_counter >= 520 && taskid == 4)  {MS_GO_DOWN();taskid++;}
     else if ( time_counter >= 520 && taskid == 5)  {FIX_POS_DJ_OPEN();taskid=-1;}
     //mission 1 end

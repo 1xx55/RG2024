@@ -120,6 +120,7 @@ class Class_Motor_With_Hall_Encoder : public Class_Motor
         Enum_Control_Method Get_Control_Method();
         float Get_Omega_Now();
         float Get_Angle_Now();
+        float Get_Angle_Target(); //add
 
         void Hall_Encoder_GPIO_EXTI_Callback();
         void Calculate_TIM_PeriodElapsedCallback();

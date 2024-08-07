@@ -338,7 +338,7 @@
               <MiscControls>--cpp11</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../User/Shoot;../User/JiXieBi;../User/Chassis;../User/Camera;../User/Task</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../User/Shoot;../User/JiXieBi;../User/Chassis;../User/Camera;../User/Task;..\User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -715,11 +715,6 @@
               <FileType>1</FileType>
               <FilePath>..\User\JiXieBi\JiXieBi.c</FilePath>
             </File>
-            <File>
-              <FileName>com_to_raspi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\JiXieBi\com_to_raspi.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -759,6 +754,16 @@
               <FileName>Task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Task\Task.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>User-raspi</GroupName>
+          <Files>
+            <File>
+              <FileName>com_to_raspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\com_to_raspi.c</FilePath>
             </File>
           </Files>
         </Group>

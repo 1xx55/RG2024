@@ -12,6 +12,7 @@ void Task_10ms_TIM_IT(TIM_HandleTypeDef *htim){
     SHOOT_TIM_IT();
     ACC_TIM14_IT();
     JiXieBi_TIM_IT();
+    COM_RASPI_TIM_IT();
 }
 
 // in main
@@ -19,4 +20,5 @@ void Task_Schedule(){
     ACC_TASK_SCHEDULE();
     SHOOT_TASK_Schedule();
     JiXieBi_TASK_Schedule();
+    COM_RASPI_TASK_SCHEDULE();
 }
