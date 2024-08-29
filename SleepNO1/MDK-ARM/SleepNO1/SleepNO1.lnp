@@ -2,6 +2,7 @@
 "sleepno1\startup_stm32f407xx.o"
 "sleepno1\main.o"
 "sleepno1\gpio.o"
+"sleepno1\dma.o"
 "sleepno1\tim.o"
 "sleepno1\usart.o"
 "sleepno1\stm32f4xx_it.o"

@@ -1,10 +1,10 @@
 #include "com_to_raspi.h"
 
 //varients
-uint8_t receive_raspy_buffer[16];
-uint8_t send_raspy_buffer[16];
-uint8_t len_exdata[16] = {0,2,3,2}; //附加数据长度
-int receive_raspy_pointer;
+unsigned char receive_raspy_buffer[16];
+unsigned char send_raspy_buffer[16];
+unsigned char len_exdata[16] = {0,2,3,2}; //附加数据长度
+int receive_raspy_pointer = 0;
 
 //EV
 extern Class_Chassis Chassis;
@@ -13,14 +13,15 @@ extern Class_Chassis Chassis;
 #define rcv_pointer receive_raspy_buffer + receive_raspy_pointer
 
 //任务定义
-uint16_t com_raspi_time_counter = 1000;
-int8_t com_raspi_taskid = -1;
+unsigned short com_raspi_time_counter = 1000;
+char com_raspi_taskid = -1;
 
 //functions
 void com_raspi_Init(){
     receive_raspy_pointer = 0;
     com_raspi_taskid = -1;
     HAL_UART_Receive_IT(&RASPI_USINGUART,rcv_pointer,1);
+    //HAL_UART_Receive(&RASPI_USINGUART,rcv_pointer,1,HAL_MAX_DELAY);
 }
 
 void handle_received_data(){

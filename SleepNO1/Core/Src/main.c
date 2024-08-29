@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -26,7 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "Shoot.h"
 #include "Chassis.hpp"
-#include "JiXieBi.h"
+#include "com_to_raspi.h"
 #include "camera_pos_dj.h"
 #include "Task.h"
 
@@ -93,6 +94,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_TIM4_Init();
   MX_TIM5_Init();
   MX_TIM14_Init();
@@ -102,20 +104,26 @@ int main(void)
   MX_TIM11_Init();
   MX_TIM8_Init();
   MX_USART3_UART_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
-  Task_TIM_Init(); //first!
-  SHOOT_Init();
-	CAMERA_POS_DJ_Init();
-  JiXieBi_Init();
-
+  // Task_TIM_Init(); //first!
+  // SHOOT_Init();
+	// CAMERA_POS_DJ_Init();
+  // JiXieBi_Init();
+  com_raspi_Init();
+//	HAL_UART_Receive_DMA(&huart3,(&huart3)->pRxBuffPtr,7);
+//  HAL_UART_Receive_IT(&huart3,(&huart3)->pRxBuffPtr,7);
+//  HAL_UARTEx_ReceiveToIdle_DMA(&huart3,(&huart3)->pRxBuffPtr,7);
+//  HAL_UARTEx_ReceiveToIdle_IT(&huart3,(&huart3)->pRxBuffPtr,7);
+  send_message_to_raspi(0x33);
 //---------------------------------底盘调试代码------------------------------------------------------
-  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
-  //底盘初始
-  Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
-  Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
-  //�???????:
-  //使能计算时钟
-  HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
+  // HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
+  // //底盘初始
+  // Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
+  // Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
+  // //�??????????????:
+  // //使能计算时钟
+  // HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
 
 
   // SpeedTypeDef v_front=
@@ -152,11 +160,14 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  
+  
   while (1)
   {
-    Task_Schedule();
-    if(cnt == 5000000)  JiXieBi_JIAQU();
-    cnt++;
+		HAL_UART_Receive_IT(&huart3,(&huart3)->pRxBuffPtr,1);
+    // Task_Schedule();
+    // if(cnt == 5000000)  JiXieBi_JIAQU();
+    // cnt++;
     
     //if(cnt%100000==0)
     // SERVOCMD_MOVE_TIME_WRITE(4,800,1000);
@@ -166,10 +177,10 @@ int main(void)
     // MOCALUN_stop();
     // HAL_Delay(2000);
     //---------------------------------底盘调试代码------------------------------------------------------
-  if(cnt == 1)Chassis.Set_add_rad(4*PI,0,0);
-  if(cnt == 10000000) Chassis.Set_add_rad(-4*PI,0,0); 
-  if(cnt == 20000000) Chassis.Set_add_rad(0,4*PI,0); 
-  if(cnt == 30000000) Chassis.Set_add_rad(0,-4*PI,0); 
+  // if(cnt == 1)Chassis.Set_add_rad(4*PI,0,0);
+  // if(cnt == 10000000) Chassis.Set_add_rad(-4*PI,0,0); 
+  // if(cnt == 20000000) Chassis.Set_add_rad(0,4*PI,0); 
+  // if(cnt == 30000000) Chassis.Set_add_rad(0,-4*PI,0); 
 
   // Chassis.Motor[0].Set_Angle_Target(10*PI);
   // Chassis.Motor[1].Set_Angle_Target(10*PI);
@@ -192,7 +203,7 @@ int main(void)
   //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
   //  Chassis.Set_Velocity(v_back);
   //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-  // ---------------------------------机械臂调试代�??????????????????????????-----------------------------------------------------
+  // ---------------------------------机械臂调试代�?????????????????????????????????-----------------------------------------------------
 //  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
 //  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
 //  HAL_Delay(2000);
@@ -274,6 +285,19 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+   if(huart == &RASPI_USINGUART){
+     handle_received_data();
+   }
+ }
+
+//void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef* huart,uint16_t Size){
+//    if(huart == &RASPI_USINGUART){
+//      cnt++;
+//      //UART_Receive();
+//      //UART_Deal_With_Received_Data();
+//    }
+//}
 
 /* USER CODE END 4 */
 

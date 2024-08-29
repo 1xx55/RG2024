@@ -37,12 +37,12 @@ sleepno1\shoot.o: ../Core/Inc/gpio.h
 sleepno1\shoot.o: ../Core/Inc/tim.h
 sleepno1\shoot.o: ..\User\Shoot\MSDriver.h
 sleepno1\shoot.o: ..\User\Shoot\fix_pos_dj.h
-sleepno1\shoot.o: ..\User\com_to_raspi.h
+sleepno1\shoot.o: ../User/com_to_raspi.h
 sleepno1\shoot.o: ../Core/Inc/usart.h
 sleepno1\shoot.o: ../User/JiXieBi/JiXieBi.h
 sleepno1\shoot.o: ../User/JiXieBi/air_pump.h
 sleepno1\shoot.o: ../User/JiXieBi/my_servo.h
-sleepno1\shoot.o: ..\User\com_to_raspi.h
+sleepno1\shoot.o: ../User/com_to_raspi.h
 sleepno1\shoot.o: ../User/Chassis/Chassis.hpp
 sleepno1\shoot.o: ../User/Chassis/Motor.hpp
 sleepno1\shoot.o: ../User/Chassis/PID.hpp

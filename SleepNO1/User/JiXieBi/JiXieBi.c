@@ -22,7 +22,6 @@ void JiXieBi_TASK_Schedule(){
         SERVOCMD_MOVE_TIME_WRITE(1,570,800);
         SERVOCMD_MOVE_TIME_WRITE(2,240,800);
         SERVOCMD_MOVE_TIME_WRITE(3,1000,800);
-        SERVOCMD_MOVE_TIME_WRITE(4,four_dj_para,800); //catch 1
         jixiebi_taskid++;  
     } 
     else if ( jixiebi_time_counter >= 87 && jixiebi_taskid == 2){
@@ -38,6 +37,7 @@ void JiXieBi_TASK_Schedule(){
     else if ( jixiebi_time_counter >= 237 && jixiebi_taskid == 4){
         SERVOCMD_MOVE_TIME_WRITE(1,700,700);
         SERVOCMD_MOVE_TIME_WRITE(2,160,700); //1,2号舵机调整好弧度
+        SERVOCMD_MOVE_TIME_WRITE(4,four_dj_para,800); //4号舵机调整
         jixiebi_taskid++; 
     }
     else if ( jixiebi_time_counter >= 350 && jixiebi_taskid == 5){
