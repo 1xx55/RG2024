@@ -111,17 +111,19 @@ int main(void)
 	// CAMERA_POS_DJ_Init();
   // JiXieBi_Init();
   com_raspi_Init();
+
 //	HAL_UART_Receive_DMA(&huart3,(&huart3)->pRxBuffPtr,7);
 //  HAL_UART_Receive_IT(&huart3,(&huart3)->pRxBuffPtr,7);
 //  HAL_UARTEx_ReceiveToIdle_DMA(&huart3,(&huart3)->pRxBuffPtr,7);
 //  HAL_UARTEx_ReceiveToIdle_IT(&huart3,(&huart3)->pRxBuffPtr,7);
-  send_message_to_raspi(0x33);
+//  send_message_to_raspi(0x33);
+
 //---------------------------------底盘调试代码------------------------------------------------------
   // HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
   // //底盘初始
   // Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
   // Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
-  // //�??????????????:
+  // //�??????????????:
   // //使能计算时钟
   // HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
 
@@ -164,7 +166,6 @@ int main(void)
   
   while (1)
   {
-		HAL_UART_Receive_IT(&huart3,(&huart3)->pRxBuffPtr,1);
     // Task_Schedule();
     // if(cnt == 5000000)  JiXieBi_JIAQU();
     // cnt++;
@@ -203,7 +204,7 @@ int main(void)
   //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
   //  Chassis.Set_Velocity(v_back);
   //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-  // ---------------------------------机械臂调试代�?????????????????????????????????-----------------------------------------------------
+  // ---------------------------------机械臂调试代�?????????????????????????????????-----------------------------------------------------
 //  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
 //  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
 //  HAL_Delay(2000);
@@ -290,14 +291,6 @@ void SystemClock_Config(void)
      handle_received_data();
    }
  }
-
-//void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef* huart,uint16_t Size){
-//    if(huart == &RASPI_USINGUART){
-//      cnt++;
-//      //UART_Receive();
-//      //UART_Deal_With_Received_Data();
-//    }
-//}
 
 /* USER CODE END 4 */
 
