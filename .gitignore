@@ -1,5 +1,8 @@
-#忽略2022以及test1文件夹
+# 忽略2022以及test1文件夹
 
 2022/
 
 Test1/
+
+# 忽略 .gitignore
+.gitignore
