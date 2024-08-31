@@ -68,6 +68,19 @@ struct SpeedTypeDef
     int8_t delta_3;
 };
 
+
+// 1xx55 added.
+/**
+ * @brief 移动所需参数类型定义
+ * 
+ */
+struct MoveParaTypeDef{
+    // using Class_Chassis::Set_add_rad.
+    float ahead;
+    float left;
+    float rotate;
+};
+
 class Class_Chassis
 {
     public:

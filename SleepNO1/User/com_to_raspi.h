@@ -35,5 +35,4 @@ void send_message_to_raspi(uint8_t message);
 void COM_RASPI_TIM_IT();
 void COM_RASPI_TASK_SCHEDULE();
 
-void chassis_finish_task_start();
 #endif
