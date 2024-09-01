@@ -56,7 +56,12 @@ void JiXieBi_TASK_Schedule(){
     }
     else if ( jixiebi_time_counter >= 565 && jixiebi_taskid == 8){
         JiXieBi_READY(); //机械臂复位
+        jixiebi_taskid ++;
+    }
+    else if ( jixiebi_time_counter >= 575 && jixiebi_taskid == 9){
+        send_message_to_raspi(TO_RASPI_JIAQU_FINISH);
         jixiebi_taskid = -1;
+        
     }
     // Task 1 end.
 }

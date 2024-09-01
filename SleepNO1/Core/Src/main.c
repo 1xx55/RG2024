@@ -106,26 +106,26 @@ int main(void)
   MX_USART3_UART_Init();
   MX_UART5_Init();
   /* USER CODE BEGIN 2 */
-  // Task_TIM_Init(); //first!
-  // SHOOT_Init();
-	// CAMERA_POS_DJ_Init();
-  // JiXieBi_Init();
+  Task_TIM_Init(); //first!
+  SHOOT_Init();
+	CAMERA_POS_DJ_Init();
+  JiXieBi_Init();
   com_raspi_Init();
 
 //	HAL_UART_Receive_DMA(&huart3,(&huart3)->pRxBuffPtr,7);
 //  HAL_UART_Receive_IT(&huart3,(&huart3)->pRxBuffPtr,7);
 //  HAL_UARTEx_ReceiveToIdle_DMA(&huart3,(&huart3)->pRxBuffPtr,7);
 //  HAL_UARTEx_ReceiveToIdle_IT(&huart3,(&huart3)->pRxBuffPtr,7);
-//  send_message_to_raspi(0x33);
+  send_message_to_raspi(0x33);
 
 //---------------------------------底盘调试代码------------------------------------------------------
-  // HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
-  // //底盘初始
-  // Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
-  // Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
-  // //�??????????????:
-  // //使能计算时钟
-  // HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
+  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);	//启动时钟
+  //底盘初始
+  Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
+  Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
+  //�??????????????:
+  //使能计算时钟
+  HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
 
 
   // SpeedTypeDef v_front=
@@ -166,9 +166,9 @@ int main(void)
   
   while (1)
   {
-    // Task_Schedule();
+    Task_Schedule();
     // if(cnt == 5000000)  JiXieBi_JIAQU();
-    // cnt++;
+    cnt++;
     
     //if(cnt%100000==0)
     // SERVOCMD_MOVE_TIME_WRITE(4,800,1000);

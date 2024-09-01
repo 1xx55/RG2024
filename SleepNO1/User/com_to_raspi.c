@@ -3,7 +3,7 @@
 //varients
 unsigned char receive_raspy_buffer[16];
 unsigned char send_raspy_buffer[16];
-unsigned char len_exdata[16] = {0,2,3,2}; //附加数据长度
+unsigned char len_exdata[16] = {0,2,3,2,1,0,0}; //附加数据长度
 int receive_raspi_pointer = 0;
 
 //EV
@@ -54,7 +54,20 @@ void handle_received_data(){
         //如果没有附加数据
         else{
             //处理该信息
+            switch (receive_raspy_buffer[2])
+            {
+            case TO_STM32_START_JIAQU:{
+                JiXieBi_JIAQU();
+                break;
+            }
+            case TO_STM32_START_SHOOT:{
+                SHOOT_START();
+                break;
+            }
 
+            default:
+                break;
+            }
 
             //处理完成，等待下一次数据
             receive_raspi_pointer = 0;
@@ -77,7 +90,7 @@ void handle_received_data(){
             
             case TO_STM32_CHASSIS_MOVE:{
                 //获取数据
-                float deg = ( (float)receive_raspy_buffer[3] * 256 + receive_raspy_buffer[4] ) / 2.0f / PI;
+                float deg = (float)( receive_raspy_buffer[3] * 256.0f + receive_raspy_buffer[4] ) / 180.0f * PI; //
                 float distance = receive_raspy_buffer[5] * CHASSIS_CM_TO_RAD;
                 // 解算分量
                 float ahead_distance = distance * cosf(deg);
@@ -95,7 +108,7 @@ void handle_received_data(){
 
             case TO_STM32_CHASSIS_ROTATE:{
                 //获取数据
-                float rad = ((float)receive_raspy_buffer[3] * 256 + receive_raspy_buffer[4] - 180.0f) /2.0f / PI;
+                float rad = ((float)receive_raspy_buffer[3] * 256 + receive_raspy_buffer[4] - 180.0f) / 180.0f * PI;
                 //TODO:这里有个常数需要整定,底盘旋转角度与轮子旋转角度的换算关系
                 rad = rad * CHASSIS_ROTATE_RAD_TO_WHEEL_RAD;
                 // 存放底盘运动指令
@@ -107,6 +120,27 @@ void handle_received_data(){
                 __movepara_queue_phead = (__movepara_queue_phead + 1) % QUEUE_MAX_LEN;
 
                 break;
+            }
+
+            case TO_STM32_CAMERA_ROTATE:{
+                //获取数据,进行选择
+                switch (receive_raspy_buffer[3]) //判指令类型
+                {
+                case CAMERA_CW90:{
+                    CAMERA_POS_DJ_ANGLE_ADD(90);
+                    break;
+                }
+                case CAMERA_CCW90:{
+                    CAMERA_POS_DJ_ANGLE_ADD(-90);
+                    break;   
+                }
+                case CAMERA_CW180:{
+                    CAMERA_POS_DJ_ANGLE_ADD(180);
+                    break;
+                }
+                default:
+                    break;
+                }    
             }
 
             default:
@@ -131,7 +165,7 @@ void send_message_to_raspi(uint8_t message){
 
 // TASK
 // epsilon: 轮子当前角度与设定角度可接受的误差，认为在误差内轮子即达到目标值，单位rad
-#define epsilon 0.01f
+#define epsilon 0.2f
 
 void COM_RASPI_TIM_IT(){
     //if(com_raspi_taskid!=-1)

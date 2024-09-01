@@ -42,4 +42,10 @@ sleepno1\com_to_raspi.o: ../User/Chassis/Chassis.hpp
 sleepno1\com_to_raspi.o: ../User/Chassis/Motor.hpp
 sleepno1\com_to_raspi.o: ../User/Chassis/PID.hpp
 sleepno1\com_to_raspi.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\limits.h
+sleepno1\com_to_raspi.o: ../User/Camera/camera_pos_dj.h
+sleepno1\com_to_raspi.o: ../Core/Inc/tim.h
+sleepno1\com_to_raspi.o: ../User/Shoot/Shoot.h
+sleepno1\com_to_raspi.o: ../User/Shoot/MoCaLun.h
+sleepno1\com_to_raspi.o: ../User/Shoot/MSDriver.h
+sleepno1\com_to_raspi.o: ../User/Shoot/fix_pos_dj.h
 sleepno1\com_to_raspi.o: D:\rmSoftware\ARM\ARMCC\Bin\..\include\math.h
