@@ -29,11 +29,12 @@
     #define CAMERA_CW90 0x01
     #define CAMERA_CCW90 0x02
     #define CAMERA_CW180 0x03
+    #define CAMERA_TO_0 0x04
 #define TO_RASPI_JIAQU_FINISH 0x85
 
 // 处理信息时所用相关参数
 // 底盘旋转度数对应轮子旋转度数的系数(待调整)
-const float CHASSIS_ROTATE_RAD_TO_WHEEL_RAD = 2.0f;
+const float CHASSIS_ROTATE_RAD_TO_WHEEL_RAD = 8.0f;
 // 底盘运动距离(cm)对应轮子旋转度数(rad)
 const float CHASSIS_CM_TO_RAD = 1.0f / (WHEEL_RADIUS * 100.0f);
 

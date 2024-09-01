@@ -163,6 +163,9 @@ int32_t Class_Motor::Get_Out()
  * @brief 设定电机占空比, 确定输出
  * 
  */
+
+#define motor_start_offset int(MOTOR_CALCULATE_PRESCALER / 6.66f)
+
 void Class_Motor::Output()
 {
     if (Out == 0)
@@ -180,7 +183,14 @@ void Class_Motor::Output()
         HAL_GPIO_WritePin(Output_A_GPIOx, Output_A_GPIO_Pin, GPIO_PIN_RESET); 
         HAL_GPIO_WritePin(Output_B_GPIOx, Output_B_GPIO_Pin, GPIO_PIN_SET);
     }
-    __HAL_TIM_SetCompare(&Driver_PWM_TIM, Driver_PWM_TIM_Channel_x, Math_Abs(Out));
+
+    int output = Math_Abs(Out) + motor_start_offset;
+    Math_Constrain(&output, -MOTOR_CALCULATE_PRESCALER, MOTOR_CALCULATE_PRESCALER);
+    if (Math_Abs(Out) < motor_start_offset ){
+        output = 0;
+    }
+    //__HAL_TIM_SetCompare(&Driver_PWM_TIM, Driver_PWM_TIM_Channel_x, Math_Abs(Out));
+    __HAL_TIM_SetCompare(&Driver_PWM_TIM, Driver_PWM_TIM_Channel_x, output);
 }
 
 /**

@@ -13,8 +13,10 @@ extern Class_Chassis Chassis;
 #define rcv_pointer receive_raspy_buffer + receive_raspi_pointer
 
 //任务定义
-unsigned short com_raspi_time_counter = 1000;
-//暂无任务id定义,因为没有需要触发激活的任务
+unsigned short com_raspi_time_counter_always = 1000;
+unsigned short com_raspi_time_counter_tmp = 0;
+short com_raspi_task_id = -1;
+//
 
 //此处有一个循环队列储存树莓派下达的系列动作指令
 #define QUEUE_MAX_LEN 32
@@ -24,8 +26,9 @@ MoveParaTypeDef Mov_mission_queue[QUEUE_MAX_LEN];
 //functions
 void com_raspi_Init(){
     receive_raspi_pointer = 0;
-    com_raspi_time_counter = 1000;
-    //com_raspi_taskid = -1;
+    com_raspi_time_counter_always = 1000;
+    com_raspi_task_id = -1;
+    com_raspi_time_counter_tmp = 0;
     __movepara_queue_phead = 0, __movepara_queue_pback = 0;
 
     HAL_UART_Receive_IT(&RASPI_USINGUART,rcv_pointer,1);
@@ -138,6 +141,10 @@ void handle_received_data(){
                     CAMERA_POS_DJ_ANGLE_ADD(180);
                     break;
                 }
+                case CAMERA_TO_0:{
+                    CAMERA_POS_DJ_ANGLE_SET(0);
+                    break;
+                }
                 default:
                     break;
                 }    
@@ -165,11 +172,23 @@ void send_message_to_raspi(uint8_t message){
 
 // TASK
 // epsilon: 轮子当前角度与设定角度可接受的误差，认为在误差内轮子即达到目标值，单位rad
-#define epsilon 0.2f
+#define epsilon 0.4f
 
 void COM_RASPI_TIM_IT(){
-    //if(com_raspi_taskid!=-1)
-        com_raspi_time_counter++;
+    com_raspi_time_counter_always++;
+    if(com_raspi_task_id!=-1)
+        com_raspi_time_counter_tmp++;    
+}
+
+void __task_next_mission(){
+    //如果还有任务，则小车执行下一任务
+
+    Chassis.Set_add_rad(Mov_mission_queue[__movepara_queue_pback].ahead,
+                        Mov_mission_queue[__movepara_queue_pback].left,
+                        Mov_mission_queue[__movepara_queue_pback].rotate
+                        );
+    //更新队列指针
+    __movepara_queue_pback = (__movepara_queue_pback + 1)% QUEUE_MAX_LEN;
 }
 
 void COM_RASPI_TASK_SCHEDULE(){
@@ -177,7 +196,7 @@ void COM_RASPI_TASK_SCHEDULE(){
     // 先定义一个变量,记一下有没有发送完成信息.0为未发送,1为已发送.
     static char send_msg_tag = 1;
     // task1 start.
-    if(com_raspi_time_counter >= 8){
+    if(com_raspi_time_counter_always >= 8){
         char flag = 1;
         //检查底盘4个轮子角度现在值是否抵达目标值
         for(char i=0; i<4; i++){
@@ -188,20 +207,21 @@ void COM_RASPI_TASK_SCHEDULE(){
 
         if(!flag){ //轮子未达到目标值
             //重设counter,过80ms后再判
-            com_raspi_time_counter = 0;
+            com_raspi_time_counter_always = 0;
         }
         else{ //已达到目标值，小车停止。
             //考虑任务队列中是否有任务。
             if(__movepara_queue_pback != __movepara_queue_phead){ 
-                //如果还有任务，则小车执行下一任务
-                Chassis.Set_add_rad(Mov_mission_queue[__movepara_queue_pback].ahead,
-                                    Mov_mission_queue[__movepara_queue_pback].left,
-                                    Mov_mission_queue[__movepara_queue_pback].rotate
-                                    );
-                //更新队列指针
-                __movepara_queue_pback = (__movepara_queue_pback + 1)% QUEUE_MAX_LEN;
-                //重置发送完成信息变量
-                send_msg_tag = 0; 
+                //如果还有任务，
+                // 延时100ms之后再进行下一任务
+                // __task_next_mission()
+                if(com_raspi_task_id == -1){
+                    //但没启动下一任务，则小车启动下一任务
+                    com_raspi_task_id = 1;
+                    //重置发送完成信息变量
+                    send_msg_tag = 0; 
+                }
+                   
             }
             else{ //暂时没任务了
                 //发送信息
@@ -211,8 +231,22 @@ void COM_RASPI_TASK_SCHEDULE(){
                     //标记：此次系列任务已发送完成信息给树莓派.
                     send_msg_tag = 1;
                 }
+                // 彻底停住小车
+                // 把角度目标值设置为当前值即可
+                for(char i=0; i<4; i++){
+                    Chassis.Motor[i].Set_Angle_Target(Chassis.Motor[i].Get_Angle_Now());
+                    Chassis.Motor[i].Set_Omega_Target(0);   
+                }
             }
             
         }
+    }
+    //task 2: 下一任务启动
+    if(com_raspi_task_id == 1 && com_raspi_time_counter_tmp >= 10){
+        //启动
+        __task_next_mission();
+        //重置任务
+        com_raspi_task_id = -1;
+        com_raspi_time_counter_tmp = 0;   
     }
 }
