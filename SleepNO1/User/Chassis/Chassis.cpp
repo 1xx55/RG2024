@@ -84,7 +84,7 @@ void Class_Chassis::Init(TIM_HandleTypeDef __Driver_PWM_TIM, TIM_HandleTypeDef _
     for(int i = 0; i < 4; i++)
     {
         Motor[i].Omega_PID.Init(800.0, 100.0, 0, (float)ULONG_MAX, (float)ULONG_MAX); 
-        Motor[i].Angle_PID.Init(20.0, 0.0, 10.0,(float)ULONG_MAX, 20.0); //最后一个参数限制了麦轮稳定速度.
+        Motor[i].Angle_PID.Init(200.0, 0.0, 0.0,(float)ULONG_MAX, 30.0); //最后一个参数限制了麦轮稳定速度.
 
     }
     // for(int i = 2; i < 4; i++)
@@ -177,9 +177,10 @@ void Class_Chassis::Calculate_TIM_PeriodElapsedCallback()
 void Class_Chassis::Set_add_rad(float ahead, float left ,float rotate){
     //设置向前移动转多少圈, 向左移动转多少圈,以及旋转。 参数为负数则为反方向.
     //读取当前角度目标值
-    float calc_target[4];
+    float calc_target[4],org_target[4];
     for(int i=0;i<4;i++){
         calc_target[i] = Motor[i].Get_Angle_Now();
+        org_target[i] = calc_target[i];
     }
     //前向转 4个轮子分别叠加角度.1,2号轮子参数多一个负号
     calc_target[0] -= ahead; 
@@ -198,8 +199,14 @@ void Class_Chassis::Set_add_rad(float ahead, float left ,float rotate){
     calc_target[3] += rotate;
     //写入计算得到的目标值
     for(int i=0;i<4;i++){
+        if (calc_target[i]-org_target[i]>0)
+            Motor[i].Set_Omega_Target(32767.0f);
+        else
+            Motor[i].Set_Omega_Target(-32767.0f);
         Motor[i].Set_Angle_Target(calc_target[i]);
     }
+    //起始共速起步
+    
     //end
 }
 

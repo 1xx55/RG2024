@@ -164,7 +164,7 @@ int32_t Class_Motor::Get_Out()
  * 
  */
 
-#define motor_start_offset int(MOTOR_CALCULATE_PRESCALER / 6.66f)
+#define motor_start_offset int(MOTOR_CALCULATE_PRESCALER / 8.3f)
 
 void Class_Motor::Output()
 {
@@ -184,11 +184,14 @@ void Class_Motor::Output()
         HAL_GPIO_WritePin(Output_B_GPIOx, Output_B_GPIO_Pin, GPIO_PIN_SET);
     }
 
-    int output = Math_Abs(Out) + motor_start_offset;
-    Math_Constrain(&output, -MOTOR_CALCULATE_PRESCALER, MOTOR_CALCULATE_PRESCALER);
-    if (Math_Abs(Out) < motor_start_offset ){
-        output = 0;
-    }
+    int output = Math_Abs(Out) ;
+    // if (output < motor_start_offset){
+    // //      output = motor_start_offset;
+    // // }
+    // // if (output < motor_start_offset/2 ){
+    //     // dead_zone
+    //     output = 0;
+    // }
     //__HAL_TIM_SetCompare(&Driver_PWM_TIM, Driver_PWM_TIM_Channel_x, Math_Abs(Out));
     __HAL_TIM_SetCompare(&Driver_PWM_TIM, Driver_PWM_TIM_Channel_x, output);
 }

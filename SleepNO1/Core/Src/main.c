@@ -123,34 +123,34 @@ int main(void)
   //底盘初始
   Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
   Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
-  //�??????????????:
+  //�??????????????????:
   //使能计算时钟
   HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
 
 
   // SpeedTypeDef v_front=
   // {
-  //   0, 0.8, 0,  0,0,0,0
+  //   0, 0.4, 0,  0,0,0,0
   // };
   // SpeedTypeDef v_back=
   // {
-  //   0, -0.8, 0,  0,0,0,0
+  //   0, -0.4, 0,  0,0,0,0
   // };
   // SpeedTypeDef v_right=
   // {
-  //   0.8, 0, 0,   0,0,0,0
+  //   0.4, 0, 0,   0,0,0,0
   // };  
   // SpeedTypeDef v_left=
   // {
-  //   -0.8, 0, 0,   0,0,0,0
+  //   -0.4, 0, 0,   0,0,0,0
   // }; 
   // SpeedTypeDef v_rotate=
   // {
-  //   0, 0, 1.5,    0,0,0,0
+  //   0, 0, 1.0,    0,0,0,0
   // };
   // SpeedTypeDef v_crotate=
   // {
-  //   0, 0, -1.5 ,    0,0,0,0
+  //   0, 0, -1.0 ,    0,0,0,0
   // };
   // SpeedTypeDef v_stop=
   // {
@@ -162,7 +162,21 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  
+  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, 8000);
+  // HAL_GPIO_WritePin(GPIOE,GPIO_PIN_2,GPIO_PIN_SET);
+  // HAL_GPIO_WritePin(GPIOE,GPIO_PIN_3,GPIO_PIN_RESET);
+
+  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_2, 8000);
+  // HAL_GPIO_WritePin(GPIOE,GPIO_PIN_4,GPIO_PIN_SET);
+  // HAL_GPIO_WritePin(GPIOE,GPIO_PIN_5,GPIO_PIN_RESET);
+
+  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_3, 8000);
+  // HAL_GPIO_WritePin(GPIOB,GPIO_PIN_7,GPIO_PIN_SET);
+  // HAL_GPIO_WritePin(GPIOB,GPIO_PIN_8,GPIO_PIN_RESET);
+
+  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_4, 8000);
+  // HAL_GPIO_WritePin(GPIOB,GPIO_PIN_5,GPIO_PIN_SET);
+  // HAL_GPIO_WritePin(GPIOB,GPIO_PIN_6,GPIO_PIN_RESET);
   
   while (1)
   {
@@ -170,7 +184,25 @@ int main(void)
     // if(cnt == 5000000)  JiXieBi_JIAQU();
     cnt++;
     
-    //if(cnt%100000==0)
+    if(cnt == 500000){
+      //Chassis.Set_add_rad(0,0,0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
+      Chassis.Set_add_rad(0,-15*PI,0);
+    }
+    // else if(cnt == 4000000){
+    //   //  Chassis.Set_add_rad(0,0,-0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
+    // }
+    // else if(cnt == 6000000){
+    //   //  Chassis.Set_add_rad(0,0,-0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
+    // }
+    // else if(cnt == 8000000){
+    //   //  Chassis.Set_add_rad(0,0,-0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
+    // }
+    // else if(cnt == 10000000){
+    //   //  Chassis.Set_add_rad(0,0,-0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
+    // }
+    // else if(cnt == 12000000){
+    //   //  Chassis.Set_add_rad(0,0,-0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
+    // }
     // SERVOCMD_MOVE_TIME_WRITE(4,800,1000);
     // HAL_Delay(1000);
     // MOCALUN_start(750);
@@ -204,7 +236,18 @@ int main(void)
   //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
   //  Chassis.Set_Velocity(v_back);
   //  HAL_Delay(2000); Chassis.Set_Velocity(v_stop); HAL_Delay(1000);
-  // ---------------------------------机械臂调试代�?????????????????????????????????-----------------------------------------------------
+
+  // __HAL_TIM_SetCompare(&Driver_PWM_TIM, TIM_CHANNEL_2, 16000);
+  // HAL_GPIO_WritePin(GPIOE,GPIO_PIN_4,GPIO_PIN_SET);
+  // HAL_GPIO_WritePin(GPIOE,GPIO_PIN_5,GPIO_PIN_RESET);
+
+  // HAL_Delay(2000);
+  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_4, 0);
+  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_3, 0);
+  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_2, 0);
+  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, 0);
+
+  // ---------------------------------机械臂调试代�?????????????????????????????????????-----------------------------------------------------
 //  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
 //  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
 //  HAL_Delay(2000);

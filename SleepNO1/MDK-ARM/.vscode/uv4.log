@@ -1,2 +1,3 @@
 Load "SleepNO1\\SleepNO1.axf" 
-Erase Done.Programming Done.Verify OK.Flash Load finished at 21:08:39
+Error: Flash Download failed  -  Target DLL has been cancelled
+Flash Load finished at 21:34:05

@@ -172,7 +172,7 @@ void send_message_to_raspi(uint8_t message){
 
 // TASK
 // epsilon: 轮子当前角度与设定角度可接受的误差，认为在误差内轮子即达到目标值，单位rad
-#define epsilon 0.4f
+#define epsilon 0.3f
 
 void COM_RASPI_TIM_IT(){
     com_raspi_time_counter_always++;
@@ -197,15 +197,23 @@ void COM_RASPI_TASK_SCHEDULE(){
     static char send_msg_tag = 1;
     // task1 start.
     if(com_raspi_time_counter_always >= 8){
-        char flag = 1;
+        char flag = 0;
         //检查底盘4个轮子角度现在值是否抵达目标值
         for(char i=0; i<4; i++){
             float diff = Chassis.Motor[i].Get_Angle_Target() - Chassis.Motor[i].Get_Angle_Now();
-            if(fabs(diff) > epsilon) //轮子当前角度值未到达目标值
-                flag = 0;
+            if(fabs(diff) < epsilon){ //轮子当前角度值到达目标值
+                flag++;
+                // 彻底停住all轮子
+                // 把角度目标值设置为当前值即可
+                for(char j=0; j<4; j++){
+                    Chassis.Motor[j].Set_Angle_Target(Chassis.Motor[j].Get_Angle_Now());
+                    Chassis.Motor[j].Set_Omega_Target(0); 
+                }
+                 
+            }
         }    
 
-        if(!flag){ //轮子未达到目标值
+        if(flag != 4){ //轮子未达到目标值
             //重设counter,过80ms后再判
             com_raspi_time_counter_always = 0;
         }
@@ -231,12 +239,7 @@ void COM_RASPI_TASK_SCHEDULE(){
                     //标记：此次系列任务已发送完成信息给树莓派.
                     send_msg_tag = 1;
                 }
-                // 彻底停住小车
-                // 把角度目标值设置为当前值即可
-                for(char i=0; i<4; i++){
-                    Chassis.Motor[i].Set_Angle_Target(Chassis.Motor[i].Get_Angle_Now());
-                    Chassis.Motor[i].Set_Omega_Target(0);   
-                }
+                
             }
             
         }
