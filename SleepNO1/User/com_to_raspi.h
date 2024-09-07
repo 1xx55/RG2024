@@ -11,7 +11,7 @@
 #include <math.h>
 
 // macros
-#define RASPI_USINGUART huart5
+#define RASPI_USINGUART huart3
 
 #define TO_STM32_ADJ_BLOCK 0x01
 #define TO_STM32_CHASSIS_MOVE 0x02
@@ -34,10 +34,10 @@
 
 // 处理信息时所用相关参数
 // 底盘旋转度数对应轮子旋转度数的系数(待调整)
-const float CHASSIS_ROTATE_RAD_TO_WHEEL_RAD = 10.8f;
+const float CHASSIS_ROTATE_RAD_TO_WHEEL_RAD = 11.3f;
 // 底盘运动距离(cm)对应轮子旋转度数(rad)
-const float CHASSIS_CM_TO_RAD = 1.0f / (WHEEL_RADIUS * 100.0f);
-
+const float CHASSIS_CM_TO_RAD_AHEAD = 1.0f / (WHEEL_RADIUS * 100.0f) * 1.9f; //1.9:实际偏差
+const float CHASSIS_CM_TO_RAD_LEFT = 1.0f / (WHEEL_RADIUS * 100.0f) / 4.045f; 
 // function declarations
 void com_raspi_Init();
 void handle_received_data();

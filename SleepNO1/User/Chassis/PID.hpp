@@ -57,6 +57,10 @@ class Class_PID
 
         void Adjust_TIM_PeriodElapsedCallback();
 
+        //积分值
+        float Integral_Error;
+        void Set_history_IE(float __IE);
+        
     protected:
 
         //PID计时器周期, s
@@ -84,8 +88,7 @@ class Class_PID
 
         //前向值
         float Pre_Value;
-        //积分值
-        float Integral_Error;
+        
         //前向误差
         float Pre_Error;
 

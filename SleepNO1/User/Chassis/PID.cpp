@@ -143,6 +143,11 @@ void Class_PID::Set_Now(float __Now)
     Now = __Now;
 }
 
+void Class_PID::Set_history_IE(float __IE)
+{   
+    Integral_Error = __IE;
+}
+
 /**
  * @brief 设定死区, Error在其绝对值内不输出
  * 

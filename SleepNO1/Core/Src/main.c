@@ -123,7 +123,7 @@ int main(void)
   //底盘初始
   Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
   Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
-  //�??????????????????:
+  //�???????????????????:
   //使能计算时钟
   HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
 
@@ -162,7 +162,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, 8000);
+  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, 4000);
   // HAL_GPIO_WritePin(GPIOE,GPIO_PIN_2,GPIO_PIN_SET);
   // HAL_GPIO_WritePin(GPIOE,GPIO_PIN_3,GPIO_PIN_RESET);
 
@@ -185,8 +185,8 @@ int main(void)
     cnt++;
     
     if(cnt == 500000){
-      //Chassis.Set_add_rad(0,0,0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
-      Chassis.Set_add_rad(0,-15*PI,0);
+      // Chassis.Set_add_rad(0,0,0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
+      Chassis.Set_add_rad(0,0,CHASSIS_ROTATE_RAD_TO_WHEEL_RAD*PI);//117,244 ,184
     }
     // else if(cnt == 4000000){
     //   //  Chassis.Set_add_rad(0,0,-0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
@@ -245,9 +245,9 @@ int main(void)
   // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_4, 0);
   // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_3, 0);
   // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_2, 0);
-  // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, 0);
+  //__HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, 4000);
 
-  // ---------------------------------机械臂调试代�?????????????????????????????????????-----------------------------------------------------
+  // ---------------------------------机械臂调试代�??????????????????????????????????????-----------------------------------------------------
 //  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
 //  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
 //  HAL_Delay(2000);

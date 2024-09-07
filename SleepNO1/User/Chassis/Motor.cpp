@@ -185,13 +185,13 @@ void Class_Motor::Output()
     }
 
     int output = Math_Abs(Out) ;
-    // if (output < motor_start_offset){
-    // //      output = motor_start_offset;
-    // // }
-    // // if (output < motor_start_offset/2 ){
-    //     // dead_zone
-    //     output = 0;
-    // }
+    if (output < motor_start_offset){
+         output = motor_start_offset;
+    }
+    if (output < motor_start_offset/2 ){
+        //dead_zone
+      output = 0;
+    }
     //__HAL_TIM_SetCompare(&Driver_PWM_TIM, Driver_PWM_TIM_Channel_x, Math_Abs(Out));
     __HAL_TIM_SetCompare(&Driver_PWM_TIM, Driver_PWM_TIM_Channel_x, output);
 }

@@ -86,6 +86,8 @@ void handle_received_data(){
             case TO_STM32_ADJ_BLOCK:{
                 //获取数据
                 int16_t para = (int16_t)receive_raspy_buffer[3] * 256 + receive_raspy_buffer[4];
+                //int16_t para = receive_raspy_buffer[4]
+
                 //机械臂设置参数
                 JiXieBi_set_fourth_dj(para);
                 break;
@@ -94,10 +96,10 @@ void handle_received_data(){
             case TO_STM32_CHASSIS_MOVE:{
                 //获取数据
                 float deg = (float)( receive_raspy_buffer[3] * 256.0f + receive_raspy_buffer[4] ) / 180.0f * PI; //
-                float distance = receive_raspy_buffer[5] * CHASSIS_CM_TO_RAD;
+                float distance = receive_raspy_buffer[5] ;
                 // 解算分量
-                float ahead_distance = distance * cosf(deg);
-                float left_distance = distance * sinf(deg);
+                float ahead_distance = distance * cosf(deg) * CHASSIS_CM_TO_RAD_AHEAD;
+                float left_distance = distance * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT + 10;
                 // 存放底盘运动指令
                 // Chassis.Set_add_rad(ahead_distance,left_distance,0);
                 Mov_mission_queue[__movepara_queue_phead].ahead = ahead_distance;
@@ -172,7 +174,7 @@ void send_message_to_raspi(uint8_t message){
 
 // TASK
 // epsilon: 轮子当前角度与设定角度可接受的误差，认为在误差内轮子即达到目标值，单位rad
-#define epsilon 0.3f
+#define epsilon 0.2f
 
 void COM_RASPI_TIM_IT(){
     com_raspi_time_counter_always++;
@@ -192,11 +194,11 @@ void __task_next_mission(){
 }
 
 void COM_RASPI_TASK_SCHEDULE(){
-    // task1: 检查底盘是否运动完成,80ms查一次,时刻检查。
+    // task1: 检查底盘是否运动完成,20ms查一次,时刻检查。
     // 先定义一个变量,记一下有没有发送完成信息.0为未发送,1为已发送.
     static char send_msg_tag = 1;
     // task1 start.
-    if(com_raspi_time_counter_always >= 8){
+    if(com_raspi_time_counter_always >= 2){
         char flag = 0;
         //检查底盘4个轮子角度现在值是否抵达目标值
         for(char i=0; i<4; i++){
@@ -208,6 +210,9 @@ void COM_RASPI_TASK_SCHEDULE(){
                 for(char j=0; j<4; j++){
                     Chassis.Motor[j].Set_Angle_Target(Chassis.Motor[j].Get_Angle_Now());
                     Chassis.Motor[j].Set_Omega_Target(0); 
+                    Chassis.Motor[j].Omega_PID.Set_history_IE(0);
+                    Chassis.Motor[j].Angle_PID.Set_K_P(30.0);
+                   
                 }
                  
             }
@@ -239,7 +244,12 @@ void COM_RASPI_TASK_SCHEDULE(){
                     //标记：此次系列任务已发送完成信息给树莓派.
                     send_msg_tag = 1;
                 }
-                
+                for(char j=0; j<4; j++){
+                    Chassis.Motor[j].Set_Angle_Target(Chassis.Motor[j].Get_Angle_Now());
+                    Chassis.Motor[j].Set_Omega_Target(0);
+                    Chassis.Motor[j].Omega_PID.Set_history_IE(0); 
+                    Chassis.Motor[j].Angle_PID.Set_K_P(30.0);
+                }
             }
             
         }
