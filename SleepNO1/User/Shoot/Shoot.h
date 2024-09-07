@@ -11,6 +11,7 @@
 
 // macros
 // shoot tim:10ms
+// variables
 
 // function declarations
 void SHOOT_TIM_IT();
@@ -19,4 +20,7 @@ void SHOOT_ABRUPT();
 void SHOOT_set_speed(int speed);
 void SHOOT_Init();
 void SHOOT_TASK_Schedule();
+
+// mission->mission
+int IS_SHOOT_BUSY();
 #endif

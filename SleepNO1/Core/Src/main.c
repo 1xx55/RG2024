@@ -182,12 +182,12 @@ int main(void)
   {
     Task_Schedule();
     // if(cnt == 5000000)  JiXieBi_JIAQU();
-    cnt++;
+    // cnt++;
     
-    if(cnt == 500000){
-      // Chassis.Set_add_rad(0,0,0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
-      Chassis.Set_add_rad(0,0,CHASSIS_ROTATE_RAD_TO_WHEEL_RAD*PI);//117,244 ,184
-    }
+    // if(cnt == 500000){
+    //   // Chassis.Set_add_rad(0,0,0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
+    //   Chassis.Set_add_rad(0,0,CHASSIS_ROTATE_RAD_TO_WHEEL_RAD*PI);//117 10pi ,244 20pi ,184 20pi*4.045 - 10 = 244
+    // }
     // else if(cnt == 4000000){
     //   //  Chassis.Set_add_rad(0,0,-0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
     // }

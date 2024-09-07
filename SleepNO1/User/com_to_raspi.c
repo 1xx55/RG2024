@@ -60,7 +60,11 @@ void handle_received_data(){
             switch (receive_raspy_buffer[2])
             {
             case TO_STM32_START_JIAQU:{
-                JiXieBi_JIAQU();
+                // 放入任务中咯！types = 1
+                // JiXieBi_JIAQU();
+                Mov_mission_queue[__movepara_queue_phead].types = MISSION_JIAQU;
+                 //队头指针更新
+                __movepara_queue_phead = (__movepara_queue_phead + 1) % QUEUE_MAX_LEN;
                 break;
             }
             case TO_STM32_START_SHOOT:{
@@ -99,7 +103,7 @@ void handle_received_data(){
                 float distance = receive_raspy_buffer[5] ;
                 // 解算分量
                 float ahead_distance = distance * cosf(deg) * CHASSIS_CM_TO_RAD_AHEAD;
-                float left_distance = distance * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT + 10;
+                float left_distance = (distance + 10) * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT;
                 // 存放底盘运动指令
                 // Chassis.Set_add_rad(ahead_distance,left_distance,0);
                 Mov_mission_queue[__movepara_queue_phead].ahead = ahead_distance;
@@ -184,11 +188,14 @@ void COM_RASPI_TIM_IT(){
 
 void __task_next_mission(){
     //如果还有任务，则小车执行下一任务
-
+    if (Mov_mission_queue[__movepara_queue_pback].types == MISSION_MOVE )
     Chassis.Set_add_rad(Mov_mission_queue[__movepara_queue_pback].ahead,
                         Mov_mission_queue[__movepara_queue_pback].left,
                         Mov_mission_queue[__movepara_queue_pback].rotate
                         );
+
+    else if (Mov_mission_queue[__movepara_queue_pback].types == MISSION_JIAQU )
+        JiXieBi_JIAQU();   
     //更新队列指针
     __movepara_queue_pback = (__movepara_queue_pback + 1)% QUEUE_MAX_LEN;
 }
@@ -225,11 +232,12 @@ void COM_RASPI_TASK_SCHEDULE(){
         else{ //已达到目标值，小车停止。
             //考虑任务队列中是否有任务。
             if(__movepara_queue_pback != __movepara_queue_phead){ 
-                //如果还有任务，
+                // 如果还有任务，
                 // 延时100ms之后再进行下一任务
                 // __task_next_mission()
-                if(com_raspi_task_id == -1){
-                    //但没启动下一任务，则小车启动下一任务
+
+                // 若执行夹取任务，还需等待到夹取方块起来才能下一任务
+                if(com_raspi_task_id == -1 && IS_JiXieBi_CanLetChassisNextMove()){
                     com_raspi_task_id = 1;
                     //重置发送完成信息变量
                     send_msg_tag = 0; 

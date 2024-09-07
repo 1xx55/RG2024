@@ -79,6 +79,9 @@ struct MoveParaTypeDef{
     float ahead;
     float left;
     float rotate;
+
+    //additional choice//
+    int types = 0;
 };
 
 class Class_Chassis
