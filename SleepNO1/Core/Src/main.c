@@ -123,7 +123,7 @@ int main(void)
   //底盘初始
   Chassis.Init(CHASSIS_MOTOR_PWM_DRIVER_TIM, CHASSIS_MOTOR_CALCULATE_TIM);
   Chassis.Set_Control_Method(Control_Method_ANGLE);     //Control_Method_OMEGA   OPENLOOP  ANGLE
-  //�???????????????????:
+  //�????????????????????:
   //使能计算时钟
   HAL_TIM_Base_Start_IT(&CHASSIS_MOTOR_CALCULATE_TIM);
 
@@ -182,12 +182,17 @@ int main(void)
   {
     Task_Schedule();
     // if(cnt == 5000000)  JiXieBi_JIAQU();
-    // cnt++;
+    cnt++;
     
-    // if(cnt == 500000){
+    if(cnt == 200000){
+    //   SHOOT_set_speed(730); //600-750;
+    //   SHOOT_START();
+    // CAMERA_POS_DJ_ANGLE_SET(90);
+    // SHOOT_START();
+    // JiXieBi_JIAQU();
     //   // Chassis.Set_add_rad(0,0,0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
-    //   Chassis.Set_add_rad(0,0,CHASSIS_ROTATE_RAD_TO_WHEEL_RAD*PI);//117 10pi ,244 20pi ,184 20pi*4.045 - 10 = 244
-    // }
+    //   // Chassis.Set_add_rad(0,0,CHASSIS_ROTATE_RAD_TO_WHEEL_RAD*PI);//117 10pi ,244 20pi ,184 20pi*4.045 - 10 = 244
+    }
     // else if(cnt == 4000000){
     //   //  Chassis.Set_add_rad(0,0,-0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
     // }
@@ -247,7 +252,7 @@ int main(void)
   // __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_2, 0);
   //__HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, 4000);
 
-  // ---------------------------------机械臂调试代�??????????????????????????????????????-----------------------------------------------------
+  // ---------------------------------机械臂调试代�???????????????????????????????????????-----------------------------------------------------
 //  SERVOCMD_MOVE_TIME_WRITE(4,500,1000);
 //  SERVOCMD_MOVE_TIME_WRITE(3,500,1000);
 //  HAL_Delay(2000);

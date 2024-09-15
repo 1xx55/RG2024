@@ -4,7 +4,7 @@
 //��������.��һ����ʱ�����
 int8_t shoot_taskid = -1;
 uint16_t time_counter = 1000;
-int speed_para = 750;
+int speed_para = 730;
 
 void SHOOT_TIM_IT(){
     if(shoot_taskid == -1) return; //
@@ -17,14 +17,13 @@ void SHOOT_TASK_Schedule(){
     //mission 1: shoot start
     if      ( time_counter >  0 && shoot_taskid == 0)    {FIX_POS_DJ_CLOSE();shoot_taskid++;}
     else if ( time_counter >= 20 && shoot_taskid == 1)   {MS_GO_UP();shoot_taskid++;}
-    else if ( time_counter >= 220 && shoot_taskid == 2)  {MOCALUN_start(speed_para);shoot_taskid++;}
-    else if ( time_counter >= 470 && shoot_taskid == 3)  {
-        MOCALUN_stop();
-        send_message_to_raspi(TO_RASPI_SHOOT_END);
-        shoot_taskid++;
+    else if ( time_counter >= 120 && shoot_taskid == 2)  {MOCALUN_start(speed_para);shoot_taskid++;}
+    else if ( time_counter >= 220 && shoot_taskid == 3)  { FIX_POS_DJ_OPEN();shoot_taskid++;}
+    else if ( time_counter >= 370 && shoot_taskid == 4)  {
+        MOCALUN_stop();shoot_taskid++;
     }
-    else if ( time_counter >= 520 && shoot_taskid == 4)  {MS_GO_DOWN();shoot_taskid++;}
-    else if ( time_counter >= 520 && shoot_taskid == 5)  {FIX_POS_DJ_OPEN();shoot_taskid=-1;}
+    else if ( time_counter >= 400 && shoot_taskid == 5)  {MS_GO_DOWN();shoot_taskid++;}
+    else if ( time_counter >= 600 && shoot_taskid == 6)  {send_message_to_raspi(TO_RASPI_SHOOT_END);shoot_taskid=-1;}
     //mission 1 end
 
 }
@@ -60,6 +59,8 @@ void SHOOT_Init(){
 }
 
 int IS_SHOOT_BUSY(){
-    if(shoot_taskid != -1) return 1;
-    else return 0; 
+    //if(shoot_taskid != -1) return 1;
+    //else return 0;
+    if(IS_Ms_At_Bottom() && shoot_taskid == -1) return 0;
+    else return 1; 
 }

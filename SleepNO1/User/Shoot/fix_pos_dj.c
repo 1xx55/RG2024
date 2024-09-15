@@ -4,7 +4,7 @@
 //[Record]舵机:夹紧775，然后790。张开1100
 
 #define ZHANGKAI 1100
-#define JIAJIN 840
+#define JIAJIN 860
 
 void FIX_POS_DJ_Init(){
     __HAL_TIM_SetCompare(&htim13,TIM_CHANNEL_1,ZHANGKAI);

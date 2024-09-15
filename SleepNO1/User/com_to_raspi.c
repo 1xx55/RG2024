@@ -103,7 +103,14 @@ void handle_received_data(){
                 float distance = receive_raspy_buffer[5] ;
                 // 解算分量
                 float ahead_distance = distance * cosf(deg) * CHASSIS_CM_TO_RAD_AHEAD;
-                float left_distance = (distance + 10) * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT;
+                float left_distance = 0;
+                // distance过小时抹去常数偏差，二段近似。
+                if (distance>=10){
+                    left_distance = (distance + 10) * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT;
+                }   
+                else{
+                    left_distance = (distance)* 2 * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT;
+                }
                 // 存放底盘运动指令
                 // Chassis.Set_add_rad(ahead_distance,left_distance,0);
                 Mov_mission_queue[__movepara_queue_phead].ahead = ahead_distance;

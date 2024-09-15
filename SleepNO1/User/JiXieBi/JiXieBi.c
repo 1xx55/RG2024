@@ -26,23 +26,26 @@ void JiXieBi_TASK_Schedule(){
         jixiebi_taskid++;  
     } 
     else if ( jixiebi_time_counter >= 2 && jixiebi_taskid == 1){
-        SERVOCMD_MOVE_TIME_WRITE(1,470,800);
+        SERVOCMD_MOVE_TIME_WRITE(1,320,800);
         SERVOCMD_MOVE_TIME_WRITE(2,190,800);
         SERVOCMD_MOVE_TIME_WRITE(3,1000,800);
         jixiebi_taskid++;  
     } 
     else if ( jixiebi_time_counter >= 87 && jixiebi_taskid == 2){
-        SERVOCMD_MOVE_TIME_WRITE(1,635,500); //catch 2 
+        SERVOCMD_MOVE_TIME_WRITE(1,425,500); //catch 2 
         jixiebi_taskid++;  
     } 
     else if ( jixiebi_time_counter >= 187 && jixiebi_taskid == 3){
-        SERVOCMD_MOVE_TIME_WRITE(1,470,300); //迅速catch 1
-        SERVOCMD_MOVE_TIME_WRITE(3,150,1600); //3号舵机直接拔起
+        SERVOCMD_MOVE_TIME_WRITE(1,300,300); //迅速catch 1
         send_message_to_raspi(TO_RASPI_CATCH_START); //拿起来了，可以看
-        jixiebi_taskid++; 
+        jixiebi_taskid = 103; 
+    }
+    else if (jixiebi_time_counter >= 200 && jixiebi_taskid == 103){
+        SERVOCMD_MOVE_TIME_WRITE(3,150,1600); //3号舵机直接拔起
+        jixiebi_taskid = 4;
     }
     else if ( jixiebi_time_counter >= 237 && jixiebi_taskid == 4){
-        SERVOCMD_MOVE_TIME_WRITE(1,700,700);
+        //SERVOCMD_MOVE_TIME_WRITE(1,420,700);
         SERVOCMD_MOVE_TIME_WRITE(2,160,700); //1,2号舵机调整好弧度
         jixiebi_taskid = 104; 
     }
@@ -51,7 +54,7 @@ void JiXieBi_TASK_Schedule(){
         jixiebi_taskid = 5;
     }
     else if ( jixiebi_time_counter >= 350 && jixiebi_taskid == 5){
-        SERVOCMD_MOVE_TIME_WRITE(1,650,700);
+        SERVOCMD_MOVE_TIME_WRITE(1,500,700);
         SERVOCMD_MOVE_TIME_WRITE(2,670,1000); //2号1号向上 往前送
         SERVOCMD_MOVE_TIME_WRITE(3,205,300); //3号稍微上抬一点
         jixiebi_taskid++; 
@@ -84,7 +87,7 @@ void JiXieBi_TASK_Schedule(){
 
 void JiXieBi_READY(){ 
     //2s
-    SERVOCMD_MOVE_TIME_WRITE(1,470,2000); //-100
+    SERVOCMD_MOVE_TIME_WRITE(1,320,2000); //-250
     SERVOCMD_MOVE_TIME_WRITE(2,190,2000); //-50
     SERVOCMD_MOVE_TIME_WRITE(3,1000,2000);
     SERVOCMD_MOVE_TIME_WRITE(4,300,2000); //catch 1

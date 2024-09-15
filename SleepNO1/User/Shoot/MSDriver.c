@@ -9,7 +9,10 @@ typedef enum{
 // 加速部分使用参数
 int acc_cnt = 66, acc_id = 66;
 //单位10ms 设置特定加速的时间
-int acc_time[11]={2,4,6,8,10,12,14,16,18,20,22};
+#define ACC_SEGS 16
+int acc_time[ACC_SEGS]={2,4,6,8,10,12,14,16,18,20,
+                  23,26,30,35,41,48};///,56,65,75};
+
 
 //functions
 
@@ -60,19 +63,24 @@ void GDM_EXTI(uint16_t GPIO_PIN){
     }
 }
 
-void set_acc_speed(int speed){
+int IS_Ms_At_Bottom(){
+    if (HAL_GPIO_ReadPin(GDM_DOWN_GPIO_Port,GDM_DOWN_Pin) == GPIO_PIN_SET) return 1;
+    else return 0;
+}
+
+void set_acc_speed(float speed){
     //speed 只建议取值 1-10 ,虽然可取到15. 暂不考虑speed取浮点数值
-    if(speed<1||speed>15)return;
+    if(speed < 1)return;
     //计数参数
-    int para = 1000/speed ; 
+    int para = 1000.0f/speed ; 
     //para 控制 PWM 周期 , speed = 1 时 para=1000 , 周期1000us=1ms
     __HAL_TIM_SET_AUTORELOAD(&htim4,para); 
     __HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_1,para/2); //50%占空比
 }
 
 void MS_GO(){
-    //如果已经在动 不开启新的go
-    if(HAL_GPIO_ReadPin(MSDriver_ENA_L_GPIO_Port,MSDriver_ENA_L_Pin) == GPIO_PIN_SET)return;
+    //如果已经在动 不开启新的go (不需要。可能卡在中间，动起来吧！)
+    // if(HAL_GPIO_ReadPin(MSDriver_ENA_L_GPIO_Port,MSDriver_ENA_L_Pin) == GPIO_PIN_SET)return;
     //开始移动，直到中断触发停止。加速过程计数由定时器完成，不占用系统时钟资源
     //
     //HAL_TIM_Base_Start_IT(&htim14);
@@ -97,12 +105,15 @@ void MS_GO_DOWN(){
 }
 
 void ACC_TIM14_IT(){
-    if(acc_id < 10)acc_cnt++; 
+    if(acc_id < ACC_SEGS)acc_cnt++; 
 }
 
 void ACC_TASK_SCHEDULE(){
-    if(acc_id < 10 && acc_cnt >= acc_time[acc_id]){
-        set_acc_speed(acc_id+1);
+    if(acc_id < ACC_SEGS && acc_cnt >= acc_time[acc_id]){
+        if(acc_id < 10)
+            set_acc_speed(acc_id+1);
+        else
+            set_acc_speed(5.5+0.5*acc_id);
         acc_id++;   
     }
 }

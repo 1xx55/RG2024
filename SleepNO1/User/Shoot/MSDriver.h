@@ -23,4 +23,7 @@ void GDM_EXTI(uint16_t GPIO_PIN);
 // 需要放入 Task
 void ACC_TIM14_IT();
 void ACC_TASK_SCHEDULE();
+
+//specials
+int IS_Ms_At_Bottom();
 #endif
