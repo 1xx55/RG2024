@@ -3,7 +3,7 @@
 //varients
 unsigned char receive_raspy_buffer[16];
 unsigned char send_raspy_buffer[16];
-unsigned char len_exdata[16] = {0,2,3,2,1,0,0}; //附加数据长度
+unsigned char len_exdata[16] = {0,2,3,2,1,0,0,0}; //附加数据长度
 int receive_raspi_pointer = 0;
 
 //EV
@@ -72,6 +72,18 @@ void handle_received_data(){
                 break;
             }
 
+            case TO_STM32_STOPALL:{
+                // 队列任务清空
+                __movepara_queue_pback = __movepara_queue_phead;
+                //小车强制停止
+                for(char j=0; j<4; j++){
+                    Chassis.Motor[j].Set_Angle_Target(Chassis.Motor[j].Get_Angle_Now());
+                    Chassis.Motor[j].Set_Omega_Target(0); 
+                    Chassis.Motor[j].Omega_PID.Set_history_IE(0);
+                    Chassis.Motor[j].Angle_PID.Set_K_P(30.0);
+                   
+                }
+            }
             default:
                 break;
             }
