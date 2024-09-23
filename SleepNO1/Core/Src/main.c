@@ -184,15 +184,17 @@ int main(void)
     // if(cnt == 5000000)  JiXieBi_JIAQU();
     cnt++;
     
-    if(cnt == 200000){
+    //if(cnt % 5000000 == 66666){
+
     //   SHOOT_set_speed(730); //600-750;
-    //   SHOOT_START();
-    // CAMERA_POS_DJ_ANGLE_SET(90);
-    // SHOOT_START();
-    // JiXieBi_JIAQU();
-    //   // Chassis.Set_add_rad(0,0,0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
+     //  SHOOT_START();
+    // CAMERA_POS_DJ_ANGLE_SET(0);
+    // CAMERA_POS_DJ_ANGLE_ADD(90);
+      //SHOOT_START();
+    //   JiXieBi_JIAQU();
+    //Chassis.Set_add_rad(0,0,100*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
     //   // Chassis.Set_add_rad(0,0,CHASSIS_ROTATE_RAD_TO_WHEEL_RAD*PI);//117 10pi ,244 20pi ,184 20pi*4.045 - 10 = 244
-    }
+    //}
     // else if(cnt == 4000000){
     //   //  Chassis.Set_add_rad(0,0,-0.5*PI*CHASSIS_ROTATE_RAD_TO_WHEEL_RAD);
     // }

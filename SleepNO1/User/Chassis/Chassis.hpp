@@ -19,6 +19,10 @@
 // #include "DR16.hpp"
 // #include "trace.hpp"
 
+/*  some define.... -----------------------------------------------------------*/
+#define CHASSIS_LOW_SPEED_UPPERBOUND 10.0f
+#define CHASSIS_MEDIUM_SPEED_UPPERBOUND 30.0f
+
 /* Exported macros -----------------------------------------------------------*/
 
 //轮半径, m

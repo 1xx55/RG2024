@@ -8,6 +8,7 @@
 #include "Chassis.hpp"
 #include "camera_pos_dj.h"
 #include "Shoot.h"
+
 #include <math.h>
 
 // macros
@@ -20,6 +21,7 @@
 #define TO_STM32_START_JIAQU 0x05
 #define TO_STM32_START_SHOOT 0x06
 #define TO_STM32_STOPALL 0x07
+#define TO_STM32_VELOCITY_LOW 0x08
 
 #define MESSAGE_HEADER 0x66
 
@@ -35,7 +37,12 @@
 
 #define MISSION_MOVE  0x00
 #define MISSION_JIAQU 0x01
+#define MISSION_MOVESLOW 0x02
+#define MISSION_SHOOT 0x03
 
+//特殊任务id,在正式进入任务之前进入一个准备状态，轮询是否可以进入任务。
+//(防止发射和夹取任务互锁。)
+#define TASK_ID_READY 0x55
 
 // 处理信息时所用相关参数
 // 底盘旋转度数对应轮子旋转度数的系数(待调整)

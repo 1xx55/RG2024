@@ -3,9 +3,9 @@
 //varients
 unsigned char receive_raspy_buffer[16];
 unsigned char send_raspy_buffer[16];
-unsigned char len_exdata[16] = {0,2,3,2,1,0,0,0}; //附加数据长度
+unsigned char len_exdata[16] = {0,2,3,2,1,0,0,0,0,0}; //附加数据长度
 int receive_raspi_pointer = 0;
-
+int __this_move_slow_tag = 0;
 //EV
 extern Class_Chassis Chassis;
 
@@ -19,7 +19,7 @@ short com_raspi_task_id = -1;
 //
 
 //此处有一个循环队列储存树莓派下达的系列动作指令
-#define QUEUE_MAX_LEN 32
+#define QUEUE_MAX_LEN 320
 char __movepara_queue_phead = 0, __movepara_queue_pback = 0;
 MoveParaTypeDef Mov_mission_queue[QUEUE_MAX_LEN];
 
@@ -68,7 +68,10 @@ void handle_received_data(){
                 break;
             }
             case TO_STM32_START_SHOOT:{
-                SHOOT_START();
+                //SHOOT_START();
+                Mov_mission_queue[__movepara_queue_phead].types = MISSION_SHOOT;
+                 //队头指针更新
+                __movepara_queue_phead = (__movepara_queue_phead + 1) % QUEUE_MAX_LEN;
                 break;
             }
 
@@ -83,7 +86,16 @@ void handle_received_data(){
                     Chassis.Motor[j].Angle_PID.Set_K_P(30.0);
                    
                 }
+                break;
             }
+
+            case TO_STM32_VELOCITY_LOW:{
+
+                __this_move_slow_tag = MISSION_MOVESLOW;
+
+                break;
+            }
+
             default:
                 break;
             }
@@ -128,6 +140,11 @@ void handle_received_data(){
                 Mov_mission_queue[__movepara_queue_phead].ahead = ahead_distance;
                 Mov_mission_queue[__movepara_queue_phead].left = left_distance;
                 Mov_mission_queue[__movepara_queue_phead].rotate = 0.0f;
+
+                //减速标签，只生效一次。
+                Mov_mission_queue[__movepara_queue_phead].types = __this_move_slow_tag;
+                __this_move_slow_tag = MISSION_MOVE;
+
                 //队头指针更新
                 __movepara_queue_phead = (__movepara_queue_phead + 1) % QUEUE_MAX_LEN;
 
@@ -172,7 +189,8 @@ void handle_received_data(){
                 }
                 default:
                     break;
-                }    
+                }   
+                break; 
             }
 
             default:
@@ -207,14 +225,46 @@ void COM_RASPI_TIM_IT(){
 
 void __task_next_mission(){
     //如果还有任务，则小车执行下一任务
-    if (Mov_mission_queue[__movepara_queue_pback].types == MISSION_MOVE )
-    Chassis.Set_add_rad(Mov_mission_queue[__movepara_queue_pback].ahead,
-                        Mov_mission_queue[__movepara_queue_pback].left,
-                        Mov_mission_queue[__movepara_queue_pback].rotate
-                        );
 
-    else if (Mov_mission_queue[__movepara_queue_pback].types == MISSION_JIAQU )
-        JiXieBi_JIAQU();   
+    switch (Mov_mission_queue[__movepara_queue_pback].types)
+    {
+
+        case MISSION_MOVE:{
+            for(char j=0; j<4; j++)
+                Chassis.Motor[j].Angle_PID.Set_Out_Max(CHASSIS_MEDIUM_SPEED_UPPERBOUND);
+
+            Chassis.Set_add_rad(Mov_mission_queue[__movepara_queue_pback].ahead,
+                            Mov_mission_queue[__movepara_queue_pback].left,
+                            Mov_mission_queue[__movepara_queue_pback].rotate
+                            );
+            break;
+        }
+
+        case MISSION_MOVESLOW:{
+            for(char j=0; j<4; j++)
+                Chassis.Motor[j].Angle_PID.Set_Out_Max(CHASSIS_LOW_SPEED_UPPERBOUND);
+
+            Chassis.Set_add_rad(Mov_mission_queue[__movepara_queue_pback].ahead,
+                            Mov_mission_queue[__movepara_queue_pback].left,
+                            Mov_mission_queue[__movepara_queue_pback].rotate
+                            ); 
+            break;   
+        }
+
+        case MISSION_JIAQU:{
+            JiXieBi_JIAQU(); 
+            break;
+        }    
+
+        case MISSION_SHOOT:{
+            SHOOT_START();
+            break;
+        }
+
+        default:
+            break;
+    }
+          
     //更新队列指针
     __movepara_queue_pback = (__movepara_queue_pback + 1)% QUEUE_MAX_LEN;
 }

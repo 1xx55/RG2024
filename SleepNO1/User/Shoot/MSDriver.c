@@ -34,6 +34,7 @@ void set_dir(DIR_status dir){
 
 
 void GDM_EXTI(uint16_t GPIO_PIN){
+    //CAMERA_POS_DJ_ANGLE_ADD(45);
     switch (GPIO_PIN)
     {
     //判断哪一个光电门感应到遮挡。

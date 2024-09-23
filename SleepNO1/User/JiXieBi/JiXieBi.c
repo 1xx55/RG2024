@@ -9,7 +9,7 @@ int16_t four_dj_para = 300;
 int8_t have_next_jiaqu = 0;
 
 void JiXieBi_TIM_IT(){
-    if(jixiebi_taskid == -1) return; 
+    if(jixiebi_taskid == -1 || jixiebi_taskid == TASK_ID_READY) return; 
     //更新计数变量
     jixiebi_time_counter++;
 }
@@ -17,8 +17,10 @@ void JiXieBi_TIM_IT(){
 void JiXieBi_TASK_Schedule(){
     // Task1: 夹取
     //条件任务：必须在发射完成后才能开始。
-    if(IS_SHOOT_BUSY()){
-        jixiebi_time_counter = 0;
+    if(jixiebi_taskid == TASK_ID_READY){
+        if(!IS_SHOOT_BUSY()){
+            jixiebi_taskid = 0;
+        }
     }
 
     if ( jixiebi_time_counter >= 1 && jixiebi_taskid == 0){
@@ -37,11 +39,11 @@ void JiXieBi_TASK_Schedule(){
     } 
     else if ( jixiebi_time_counter >= 187 && jixiebi_taskid == 3){
         SERVOCMD_MOVE_TIME_WRITE(1,300,300); //迅速catch 1
-        send_message_to_raspi(TO_RASPI_CATCH_START); //拿起来了，可以看
         jixiebi_taskid = 103; 
     }
     else if (jixiebi_time_counter >= 200 && jixiebi_taskid == 103){
         SERVOCMD_MOVE_TIME_WRITE(3,150,1600); //3号舵机直接拔起
+        send_message_to_raspi(TO_RASPI_CATCH_START); //拿起来了，可以看
         jixiebi_taskid = 4;
     }
     else if ( jixiebi_time_counter >= 237 && jixiebi_taskid == 4){
@@ -76,7 +78,7 @@ void JiXieBi_TASK_Schedule(){
         if (have_next_jiaqu){
             have_next_jiaqu = 0;
             jixiebi_time_counter = 0;
-            jixiebi_taskid = 0;
+            jixiebi_taskid = TASK_ID_READY;
         }
         else{
             jixiebi_taskid = -1;
@@ -96,7 +98,7 @@ void JiXieBi_READY(){
 void JiXieBi_JIAQU(){ //从0开始计数 开始执行任务 time_counter = 10代表任务结束
     if (jixiebi_taskid == -1){
         jixiebi_time_counter = 0;
-        jixiebi_taskid = 0;
+        jixiebi_taskid = TASK_ID_READY;
     }
     else{
         have_next_jiaqu = 1;
@@ -118,8 +120,14 @@ void JiXieBi_Init(){
 }
 
 int IS_JiXieBi_CanLetChassisNextMove(){
-    if(jixiebi_taskid == -1 || (jixiebi_taskid >=4 && have_next_jiaqu==0)) return 1;
+    if(jixiebi_taskid == -1 || (jixiebi_taskid >=4 && jixiebi_taskid < 100 && have_next_jiaqu==0)) return 1;
     else return 0;
+}
+
+int IS_JiXieBi_Busy(){
+    if(jixiebi_taskid == -1 || jixiebi_taskid == TASK_ID_READY)return 0;
+    else return 1;
+
 }
 
 //机械臂的舵机回到初始姿态,5s

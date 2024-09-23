@@ -84,7 +84,7 @@ void Class_Chassis::Init(TIM_HandleTypeDef __Driver_PWM_TIM, TIM_HandleTypeDef _
     for(int i = 0; i < 4; i++)
     {
         Motor[i].Omega_PID.Init(800.0, 100.0, 0, (float)ULONG_MAX, (float)ULONG_MAX); 
-        Motor[i].Angle_PID.Init(200.0, 0.0, 0.0,(float)ULONG_MAX, 30.0); //最后一个参数限制了麦轮稳定速度.
+        Motor[i].Angle_PID.Init(200.0, 0.0, 0.0,(float)ULONG_MAX, CHASSIS_MEDIUM_SPEED_UPPERBOUND); //最后一个参数限制了麦轮稳定速度.
     }
     // for(int i = 2; i < 4; i++)
     // {

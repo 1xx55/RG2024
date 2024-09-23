@@ -21,4 +21,6 @@ void JiXieBi_JIAQU();
 void JiXieBi_set_fourth_dj(int16_t para);
 
 int IS_JiXieBi_CanLetChassisNextMove();
+int IS_JiXieBi_Busy();
+
 #endif

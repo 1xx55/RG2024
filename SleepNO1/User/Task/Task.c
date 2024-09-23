@@ -17,8 +17,9 @@ void Task_10ms_TIM_IT(TIM_HandleTypeDef *htim){
 
 // in main
 void Task_Schedule(){
+    //设置这里的顺序似乎可以调整优先级，但实际上好像不会。
     ACC_TASK_SCHEDULE();
-    SHOOT_TASK_Schedule();
     JiXieBi_TASK_Schedule();
+    SHOOT_TASK_Schedule();
     COM_RASPI_TASK_SCHEDULE();
 }

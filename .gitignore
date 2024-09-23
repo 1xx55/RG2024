@@ -5,6 +5,7 @@
 Test1/
 
 # 忽略 .gitignore
-.gitignore
+# .gitignore
 
 SleepNO1/MDK-ARM/SleepNO1/
+
