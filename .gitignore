@@ -6,6 +6,6 @@ Test1/
 
 # 忽略 .gitignore
 # .gitignore
-
+# 忽略编译文件
 SleepNO1/MDK-ARM/SleepNO1/
 

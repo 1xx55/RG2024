@@ -161,9 +161,11 @@ void handle_received_data(){
                 Mov_mission_queue[__movepara_queue_phead].ahead = 0.0f;
                 Mov_mission_queue[__movepara_queue_phead].left = 0.0f;
                 Mov_mission_queue[__movepara_queue_phead].rotate = rad;
+
+                Mov_mission_queue[__movepara_queue_phead].types = MISSION_MOVE;
                 //队头指针更新
                 __movepara_queue_phead = (__movepara_queue_phead + 1) % QUEUE_MAX_LEN;
-
+                
                 break;
             }
 

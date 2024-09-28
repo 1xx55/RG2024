@@ -21,7 +21,7 @@ void __CAMERA_SET_ANGLE(){
 
 void CAMERA_POS_DJ_Init(){
   //init angle.
-    camera_angle = 184;
+    camera_angle = 180;
     //__HAL_TIM_SetCompare(&htim11,TIM_CHANNEL_1,500);
     __CAMERA_SET_ANGLE();
     HAL_TIM_PWM_Start(&htim11,TIM_CHANNEL_1);
