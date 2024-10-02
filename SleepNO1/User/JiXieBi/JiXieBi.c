@@ -73,7 +73,7 @@ void JiXieBi_TASK_Schedule(){
         JiXieBi_READY(); //机械臂复位
         jixiebi_taskid ++;
     }
-    else if ( jixiebi_time_counter >= 575 && jixiebi_taskid == 9){
+    else if ( jixiebi_time_counter >= 765 && jixiebi_taskid == 9){
         send_message_to_raspi(TO_RASPI_JIAQU_FINISH);
         if (have_next_jiaqu){
             have_next_jiaqu = 0;

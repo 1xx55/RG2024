@@ -3,9 +3,10 @@
 //varients
 unsigned char receive_raspy_buffer[16];
 unsigned char send_raspy_buffer[16];
-unsigned char len_exdata[16] = {0,2,3,2,1,0,0,0,0,0}; //附加数据长度
+unsigned char len_exdata[16] = {0,2,3,2,1,0,0,0,0,0,0,0,0}; //附加数据长度
 int receive_raspi_pointer = 0;
 int __this_move_slow_tag = 0;
+int tag_82lock = 0;
 //EV
 extern Class_Chassis Chassis;
 
@@ -19,9 +20,9 @@ short com_raspi_task_id = -1;
 //
 
 //此处有一个循环队列储存树莓派下达的系列动作指令
-#define QUEUE_MAX_LEN 320
-char __movepara_queue_phead = 0, __movepara_queue_pback = 0;
-MoveParaTypeDef Mov_mission_queue[QUEUE_MAX_LEN];
+#define QUEUE_MAX_LEN 3200
+uint32_t __movepara_queue_phead = 0, __movepara_queue_pback = 0;
+MoveParaTypeDef Mov_mission_queue[QUEUE_MAX_LEN+3];
 
 //functions
 void com_raspi_Init(){
@@ -30,7 +31,7 @@ void com_raspi_Init(){
     com_raspi_task_id = -1;
     com_raspi_time_counter_tmp = 0;
     __movepara_queue_phead = 0, __movepara_queue_pback = 0;
-
+    tag_82lock = 0;
     HAL_UART_Receive_IT(&RASPI_USINGUART,rcv_pointer,1);
 }
 
@@ -96,6 +97,16 @@ void handle_received_data(){
                 break;
             }
 
+            case TO_STM32_82LOCK:{
+                tag_82lock = 1;
+                break;
+            }
+
+            case TO_STM32_82RELEASE:{
+                tag_82lock = 0;
+                break;
+            }
+
             default:
                 break;
             }
@@ -157,7 +168,7 @@ void handle_received_data(){
                     //     distance = (distance - 7) * 10.0 / 9.0;
                     // }
 
-                    left_distance = (distance)* 1.5 * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT;
+                    left_distance = (distance)* 1.8 * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT;
                 }
 
                 // 存放底盘运动指令
@@ -242,7 +253,8 @@ void send_message_to_raspi(uint8_t message){
 
 // TASK
 // epsilon: 轮子当前角度与设定角度可接受的误差，认为在误差内轮子即达到目标值，单位rad
-#define epsilon 0.2f
+// #define epsilon 0.2f
+#define epsilon 0.1f
 
 void COM_RASPI_TIM_IT(){
     com_raspi_time_counter_always++;
@@ -344,9 +356,17 @@ void COM_RASPI_TASK_SCHEDULE(){
                 //发送信息
                 if(!send_msg_tag){ //如果本次系列任务没发过
                     //发送
-                    send_message_to_raspi(TO_RASPI_MOVE_FINISH);
+                    // 如果上一个是旋转任务,也不发82.(2024.10.4新增)
+                    uint32_t last_mission = (__movepara_queue_pback + QUEUE_MAX_LEN - 1) % QUEUE_MAX_LEN;
+                    float last_deg = Mov_mission_queue[last_mission].rotate;
+
+                    // 82lock:禁止发送82.
+                    if (!tag_82lock && !(Mov_mission_queue[last_mission].types == MISSION_MOVE && last_deg > 0.5f)){
+                        send_message_to_raspi(TO_RASPI_MOVE_FINISH);
+                    };
                     //标记：此次系列任务已发送完成信息给树莓派.
                     send_msg_tag = 1;
+                    
                 }
                 for(char j=0; j<4; j++){
                     Chassis.Motor[j].Set_Angle_Target(Chassis.Motor[j].Get_Angle_Now());
@@ -359,7 +379,7 @@ void COM_RASPI_TASK_SCHEDULE(){
         }
     }
     //task 2: 下一任务启动
-    if(com_raspi_task_id == 1 && com_raspi_time_counter_tmp >= 10){
+    if(com_raspi_task_id == 1 && com_raspi_time_counter_tmp >= 1){
         //启动
         __task_next_mission();
         //重置任务

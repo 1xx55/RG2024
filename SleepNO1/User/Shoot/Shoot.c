@@ -22,11 +22,11 @@ void SHOOT_TASK_Schedule(){
     //mission 1: shoot start
     if      ( time_counter >  0 && shoot_taskid == 0)    {FIX_POS_DJ_CLOSE();shoot_taskid++;}
     else if ( time_counter >= 20 && shoot_taskid == 1)   {MS_GO_UP();shoot_taskid++;}
-    else if ( time_counter >= 120 && shoot_taskid == 2)  {//MOCALUN_start(speed_para);
+    else if ( time_counter >= 120 && shoot_taskid == 2)  {MOCALUN_start(speed_para);
     shoot_taskid++;}
     else if ( time_counter >= 220 && shoot_taskid == 3)  { FIX_POS_DJ_OPEN();shoot_taskid++;}
     else if ( time_counter >= 370 && shoot_taskid == 4)  {
-        //MOCALUN_stop();
+        MOCALUN_stop();
         shoot_taskid++;
     }
     else if ( time_counter >= 400 && shoot_taskid == 5)  {MS_GO_DOWN();shoot_taskid++;}
