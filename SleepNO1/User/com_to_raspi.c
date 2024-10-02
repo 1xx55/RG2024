@@ -128,13 +128,38 @@ void handle_received_data(){
                 // 解算分量
                 float ahead_distance = distance * cosf(deg) * CHASSIS_CM_TO_RAD_AHEAD;
                 float left_distance = 0;
+
                 // distance过小时抹去常数偏差，二段近似。
                 if (distance>=10){
+                    //第二次线性拟合
+                    if (fabs(deg - 3*PI/2) < 1e-1 ){ // 270 deg
+                        distance = (distance - 9) * 10.0 / 9.0;
+                    }
+                    else if( fabs(deg - PI/2) < 1e-1){  // 90 deg
+                        distance = (distance - 7) * 10.0 / 9.0;
+                    }
+
                     left_distance = (distance + 10) * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT;
+                    
+                    // if (fabs(deg - 3*PI/2)<1e-1) // 270 deg
+                    //     //left_distance = (left_distance -9)*10.0/9.0; //left_distance是负数啊哥们
+                    //     left_distance = (left_distance + 9)*10.0/9.0;
+                    // else if(fabs(deg - PI/2)<1e-1) // 90 deg
+                    //     left_distance = (left_distance -7)*10.0/9.0;
+                    
                 }   
                 else{
-                    left_distance = (distance)* 2 * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT;
+
+                    // if (fabs(deg - 3*PI/2) < 1e-1 ){ // 270 deg
+                    //     distance = (distance - 9) * 10.0 / 9.0;
+                    // }
+                    // else if( fabs(deg - PI/2) < 1e-1){  // 90 deg
+                    //     distance = (distance - 7) * 10.0 / 9.0;
+                    // }
+
+                    left_distance = (distance)* 1.5 * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT;
                 }
+
                 // 存放底盘运动指令
                 // Chassis.Set_add_rad(ahead_distance,left_distance,0);
                 Mov_mission_queue[__movepara_queue_phead].ahead = ahead_distance;

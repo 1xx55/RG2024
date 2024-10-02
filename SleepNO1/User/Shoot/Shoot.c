@@ -62,6 +62,7 @@ void SHOOT_set_speed(int speed){
 
 void SHOOT_Init(){
     //���������ʼ��
+    
     MS_Init();
     FIX_POS_DJ_Init();
     MOCALUN_Init();
