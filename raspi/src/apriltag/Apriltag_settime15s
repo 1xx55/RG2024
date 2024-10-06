@@ -1,0 +1,90 @@
+import cv2
+import numpy as np
+import apriltag
+import os
+import csv
+import time
+
+# Create a folder to save images
+images_folder = "detected_tags_images"
+if not os.path.exists(images_folder):
+    os.makedirs(images_folder)
+
+# Initialize CSV files and write the header rows
+detection_csv_filename = os.path.join(images_folder, "detection_results.csv")
+frames_csv_filename = os.path.join(images_folder, "frame_timestamps.csv")
+
+# For detection results
+with open(detection_csv_filename, 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Time", "Tag ID", "Tag Position"])
+
+# For frame timestamps
+with open(frames_csv_filename, 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Frame Timestamp"])
+
+# Camera intrinsic parameters
+camera_matrix = np.array([[930.79652155, 0, 661.20967027],
+                          [0, 932.27891919, 408.65175784],
+                          [0, 0, 1]], dtype=np.float64)
+dist_coeffs = np.array([[0.0481284473, -0.0886667343, 0.000604081268, -0.0000677186841, 0.0281485370]])
+
+# The actual size of the AprilTag
+tag_size = 0.16
+
+cap = cv2.VideoCapture(0)  # Capture from the camera
+options = apriltag.Detector(apriltag.DetectorOptions(families='tag36h11'))
+
+start_time = time.time()
+duration = 15  # Set the duration of the loop to 15 seconds
+
+while time.time() - start_time < duration:  # Loop for 15 seconds
+    ret, image1 = cap.read()
+    if not ret:
+        break  # Exit the loop if the image cannot be captured
+
+    current_time = time.time()  # Get the current time
+
+    # Record the frame timestamp
+    with open(frames_csv_filename, 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([current_time])
+
+    gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
+    results = options.detect(gray)
+    image_processed = False  # Flag to mark if the image has been processed
+
+    for r in results:
+        id = r.tag_id
+        print(f"Detected AprilTag ID: {id}, Time: {current_time}")
+
+        corners = r.corners.astype(int)
+        for i in range(4):
+            cv2.line(image1, tuple(corners[i - 1]), tuple(corners[i]), (255, 0, 255), 2, cv2.LINE_AA)
+
+        object_points = np.array([[-tag_size / 2, -tag_size / 2, 0],
+                                  [tag_size / 2, -tag_size / 2, 0],
+                                  [tag_size / 2, tag_size / 2, 0],
+                                  [-tag_size / 2, tag_size / 2, 0]])
+        retval, rvec, tvec = cv2.solvePnP(object_points, corners.astype(np.float64), camera_matrix, dist_coeffs)
+
+        tag_position = tvec.flatten()
+
+        center = np.mean(corners, axis=0).astype(int)
+        cv2.circle(image1, tuple(center), 5, (0, 0, 255), -1)
+        cv2.putText(image1, f"ID: {id}", (center[0], center[1] - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+
+        with open(detection_csv_filename, 'a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([current_time, id, tag_position])
+
+        image_processed = True
+
+    cv2.imshow("Apriltags", image1)
+    if cv2.waitKey(1) & 0xFF == ord('q'):  # This line is now optional due to the timer
+        break
+
+# Release the camera and close all windows
+cap.release()
+cv2.destroyAllWindows()
