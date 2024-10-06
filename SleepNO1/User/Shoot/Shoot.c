@@ -16,7 +16,8 @@ void SHOOT_TASK_Schedule(){
     //put in main while 1
     //检查与夹取的互斥
     if (shoot_taskid == TASK_ID_READY){
-        if(!IS_JiXieBi_Busy()) shoot_taskid = 0;
+        //if(!IS_JiXieBi_Busy()) 
+        shoot_taskid = 0;
     }
 
     //mission 1: shoot start

@@ -1,2 +1,19 @@
-Load "SleepNO1\\SleepNO1.axf" 
-Erase Done.Programming Done.Verify OK.Flash Load finished at 19:26:04
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\rmSoftware\ARM\ARMCC\Bin'
+Build target 'SleepNO1'
+compiling com_to_raspi.c...
+..\User\com_to_raspi.c(152): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                      if (fabs(deg - 3*PI/2) < 1e-1 ){ // 270 deg
+..\User\com_to_raspi.c(153): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                          distance = (distance - 9) * 10.0 / 9.0;
+..\User\com_to_raspi.c(155): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                      else if( fabs(deg - PI/2) < 1e-1){  // 90 deg
+..\User\com_to_raspi.c(156): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                          distance = (distance - 7) * 10.0 / 9.0;
+..\User\com_to_raspi.c(177): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                      left_distance = (distance)* 1.8 * sinf(deg) * CHASSIS_CM_TO_RAD_LEFT;
+..\User\com_to_raspi.c: 5 warnings, 0 errors
+linking...
+Program Size: Code=27804 RO-data=512 RW-data=168 ZI-data=55592  
+FromELF: creating hex file...
+"SleepNO1\SleepNO1.axf" - 0 Error(s), 5 Warning(s).
+Build Time Elapsed:  00:00:02
