@@ -205,6 +205,8 @@ void Class_Chassis::Set_add_rad(float ahead, float left ,float rotate){
     //         Motor[i].Set_Omega_Target(-3000.0f);
         Motor[i].Set_Angle_Target(calc_target[i]);
         Motor[i].Angle_PID.Set_K_P(200.0);
+        //add here! forgot ie=0
+        Motor[i].Omega_PID.Set_history_IE(0);
     }
     //起始共速起步
     

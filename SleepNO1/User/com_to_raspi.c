@@ -14,8 +14,9 @@ extern Class_Chassis Chassis;
 #define rcv_pointer receive_raspy_buffer + receive_raspi_pointer
 
 //任务定义
-unsigned short com_raspi_time_counter_always = 1000;
-unsigned short com_raspi_time_counter_tmp = 0;
+uint32_t com_raspi_time_counter_always = 1000;
+uint32_t com_raspi_time_counter_tmp = 0;
+uint32_t com_raspi_time_counter_maxslowmove = 0;
 short com_raspi_task_id = -1;
 //
 
@@ -30,6 +31,7 @@ void com_raspi_Init(){
     com_raspi_time_counter_always = 1000;
     com_raspi_task_id = -1;
     com_raspi_time_counter_tmp = 0;
+    com_raspi_time_counter_maxslowmove = 0;
     __movepara_queue_phead = 0, __movepara_queue_pback = 0;
     tag_82lock = 0;
     HAL_UART_Receive_IT(&RASPI_USINGUART,rcv_pointer,1);
@@ -68,13 +70,13 @@ void handle_received_data(){
                 __movepara_queue_phead = (__movepara_queue_phead + 1) % QUEUE_MAX_LEN;
                 break;
             }
-            case TO_STM32_START_SHOOT:{
-                //SHOOT_START();
-                Mov_mission_queue[__movepara_queue_phead].types = MISSION_SHOOT;
-                 //队头指针更新
-                __movepara_queue_phead = (__movepara_queue_phead + 1) % QUEUE_MAX_LEN;
-                break;
-            }
+            // case TO_STM32_START_SHOOT:{
+            //     //SHOOT_START();
+            //     Mov_mission_queue[__movepara_queue_phead].types = MISSION_SHOOT;
+            //      //队头指针更新
+            //     __movepara_queue_phead = (__movepara_queue_phead + 1) % QUEUE_MAX_LEN;
+            //     break;
+            // }
 
             case TO_STM32_STOPALL:{
                 // 队列任务清空
@@ -136,6 +138,10 @@ void handle_received_data(){
                 //获取数据
                 float deg = (float)( receive_raspy_buffer[3] * 256.0f + receive_raspy_buffer[4] ) / 180.0f * PI; //
                 float distance = receive_raspy_buffer[5] ;
+
+                //特判01数据表示1.5cm
+                if (receive_raspy_buffer[5] == 1) distance = 1.5;
+
                 // 解算分量
                 float ahead_distance = distance * cosf(deg) * CHASSIS_CM_TO_RAD_AHEAD;
                 float left_distance = 0;
@@ -254,12 +260,15 @@ void send_message_to_raspi(uint8_t message){
 // TASK
 // epsilon: 轮子当前角度与设定角度可接受的误差，认为在误差内轮子即达到目标值，单位rad
 // #define epsilon 0.2f
-#define epsilon 0.1f
-
+// #define epsilon 0.1f
+#define epsilon 0.2f
 void COM_RASPI_TIM_IT(){
     com_raspi_time_counter_always++;
     if(com_raspi_task_id!=-1)
-        com_raspi_time_counter_tmp++;    
+        com_raspi_time_counter_tmp++;   
+    uint32_t last_mission = (__movepara_queue_pback + QUEUE_MAX_LEN - 1) % QUEUE_MAX_LEN;
+    if(Mov_mission_queue[last_mission].types == MISSION_MOVESLOW) 
+        com_raspi_time_counter_maxslowmove++;
 }
 
 void __task_next_mission(){
@@ -296,7 +305,7 @@ void __task_next_mission(){
         }    
 
         case MISSION_SHOOT:{
-            SHOOT_START();
+            //SHOOT_START();
             break;
         }
 
@@ -319,24 +328,22 @@ void COM_RASPI_TASK_SCHEDULE(){
         for(char i=0; i<4; i++){
             float diff = Chassis.Motor[i].Get_Angle_Target() - Chassis.Motor[i].Get_Angle_Now();
             if(fabs(diff) < epsilon){ //轮子当前角度值到达目标值
-                flag++;
+                flag ++;
                 // 彻底停住all轮子
-                // 把角度目标值设置为当前值即可
+                // 把角度目标值设置为当前值即可 
                 for(char j=0; j<4; j++){
                     Chassis.Motor[j].Set_Angle_Target(Chassis.Motor[j].Get_Angle_Now());
                     Chassis.Motor[j].Set_Omega_Target(0); 
                     Chassis.Motor[j].Omega_PID.Set_history_IE(0);
                     Chassis.Motor[j].Angle_PID.Set_K_P(30.0);
-                   
-                }
-                 
+                }   
             }
-        }    
+        } 
 
-        if(flag != 4){ //轮子未达到目标值
-            //重设counter,过80ms后再判
-            com_raspi_time_counter_always = 0;
+        if(flag == 0){ //轮子未达到目标值
+            //重设counter,过20ms后再判 (放在if后面)
         }
+
         else{ //已达到目标值，小车停止。
             //考虑任务队列中是否有任务。
             if(__movepara_queue_pback != __movepara_queue_phead){ 
@@ -344,13 +351,36 @@ void COM_RASPI_TASK_SCHEDULE(){
                 // 延时100ms之后再进行下一任务
                 // __task_next_mission()
 
-                // 若执行夹取任务，还需等待到夹取方块起来才能下一任务
-                if(com_raspi_task_id == -1 && IS_JiXieBi_CanLetChassisNextMove()){
-                    com_raspi_task_id = 1;
-                    //重置发送完成信息变量
-                    send_msg_tag = 0; 
-                }
-                   
+                // 若在执行夹取任务，还需等待到夹取方块起来才能下一移动任务
+                // 若在执行夹取任务，且下一任务还是夹取，则需等待丝杆归位。
+                int next_mission_type = Mov_mission_queue[__movepara_queue_pback].types;
+                switch (next_mission_type)
+                {
+                    case MISSION_MOVESLOW:{
+                        // same as mission move;  so here no break;
+                    }
+                    case MISSION_MOVE:{
+                        if(com_raspi_task_id == -1 && IS_JiXieBi_CanLetChassisNextMove()){
+                            com_raspi_task_id = 1;
+                            //重置发送完成信息变量
+                            send_msg_tag = 0; 
+                        }
+                        break;
+                    }    
+                    
+                    case MISSION_JIAQU:{
+                        if(com_raspi_task_id == -1 && !IS_JiXieBi_Busy()){
+                            com_raspi_task_id = 1;
+                            //重置发送完成信息变量
+                            send_msg_tag = 0; 
+                        }
+                        break;
+                    }
+
+                    default:
+                        break;
+                    }
+     
             }
             else{ //暂时没任务了
                 //发送信息
@@ -375,7 +405,9 @@ void COM_RASPI_TASK_SCHEDULE(){
                     Chassis.Motor[j].Angle_PID.Set_K_P(30.0);
                 }
             }
-            
+        //20ms 1判    
+        com_raspi_time_counter_always = 0;
+    
         }
     }
     //task 2: 下一任务启动
@@ -384,6 +416,16 @@ void COM_RASPI_TASK_SCHEDULE(){
         __task_next_mission();
         //重置任务
         com_raspi_task_id = -1;
-        com_raspi_time_counter_tmp = 0;   
+        com_raspi_time_counter_tmp = 0; 
+        com_raspi_time_counter_maxslowmove = 0;  
     }
+
+    //task 3: 微移超过0.5s跳过该任务。(先不07)
+    // if (com_raspi_time_counter_maxslowmove >= 50){
+    //     if(__movepara_queue_pback != __movepara_queue_phead){
+    //         //更新队列指针
+    //         //__movepara_queue_pback = (__movepara_queue_pback + 1)% QUEUE_MAX_LEN; 
+    //     }
+    //     com_raspi_time_counter_maxslowmove = 0;    
+    // }
 }
