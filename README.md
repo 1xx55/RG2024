@@ -135,8 +135,8 @@ UART3用于和上位机通信，通信协议见[单片机和树莓派的通信�
 通信时注意usb转ttl可以不接5v线（有时候接了会通信不上，也不知道为啥）
 
 ### others
+**感谢我们队超赞的视觉队友[Dwanpvic](https://github.com/Dwanpvic)，调了很多上位机的策略，让小车拥有了“双眼”和“大脑”。强烈建议大家去他的[Dwanpvic-RoboGame2024]([https://github.com/Dwanpvic](https://github.com/Dwanpvic/RoboGame2024))视觉代码项目上点个star哦!**
+
 [bug日志](readmeref/bugs.md)
 
 积分赛后电控手撕面包怒写遥控车py代码，开着遥控车去偷看其他队积分赛。详情见[代码](play.py)
-
-raspi文件夹下为我们队视觉代码(好像没注意一起传上来了)。我们的视觉超级厉害，强烈建议大家去他的主页[Dwanpvic](https://github.com/Dwanpvic)的视觉代码项目上点个star哦!
